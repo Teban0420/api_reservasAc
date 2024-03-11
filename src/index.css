@@ -1,0 +1,30 @@
+
+.formulario {
+    margin-top: 10rem;    
+    text-align: center;
+}
+.formulario h2 {
+    margin: 30px;
+    text-align: center;
+}
+.formulario__reservas {
+    margin-left: 15px;
+    gap: 10px;    
+}
+
+.carrusel{
+    margin-top: 3px;
+    width: 100%;
+}
+.tab {
+    margin-left: 20px;
+    width: 100%;
+}
+.formulario_div {
+    width: min(100%, 1200px);
+    margin: 0 auto;     
+}
+.tabla {
+    padding-left: 45%;
+    /* background-color: #DDDDFF; */
+}
