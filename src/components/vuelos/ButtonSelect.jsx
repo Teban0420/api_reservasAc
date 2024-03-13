@@ -1,6 +1,6 @@
 
 import { useNavigate } from 'react-router-dom';
-import { Button, Popconfirm } from 'antd';
+import { Button, Popconfirm, Form, Input } from 'antd';
 import {  useMemo, useState} from 'react';
 import { infoReserva } from './helpers/infoReserva';
 import { Bookings } from '../../api/Bookings';
@@ -13,13 +13,11 @@ export const BtnSelect = ({segment, reserva}) => {
     
     const [open, setOpen] = useState(false);
     const [confirmLoading, setConfirmLoading] = useState(false);
-        
-     // navigate('/formulario/booking', {
-     //     state: { bookingData: datos}
-    // });
-    
+    const [ mostrar, setMostrar ] = useState(false);
+            
     const showPopconfirm = () => {
-        setOpen(true);
+        // setOpen(true);
+        setMostrar(!mostrar);
     };
     
     const handleOk = () => {
@@ -36,6 +34,13 @@ export const BtnSelect = ({segment, reserva}) => {
     const handleCancel = () => {        
         setOpen(false);
     };
+
+    const onFinish = (values) => {
+        console.log('Success:', values);
+      };
+      const onFinishFailed = (errorInfo) => {
+        console.log('Failed:', errorInfo);
+      };
 
     const crearReserva = async (reserva) => {
         
@@ -54,26 +59,67 @@ export const BtnSelect = ({segment, reserva}) => {
     
     return(
         <>      
-            <Popconfirm
-                title="Flight"
-                description="Seleccionar este vuelo?"
-                open={open}
-                onConfirm={handleOk}
-                okButtonProps={{ loading: confirmLoading }}
-                onCancel={handleCancel}
-            >
+           <br />
+                {
+                    (mostrar) && <div 
+                        style={{
+                            display: 'flex', 
+                            flexDirection: 'row',  
+                            justifyContent: 'flex-start', 
+                            
+                        }}
+                >
+                        <Form
+                            name="oneLineForm"
+                            layout="inline"
+                            onFinish={onFinish}
+                            style={{ display: 'flex', gap: '2px', alignItems: 'flex-end' }}
+                            >
+    
+                        <Form.Item
+                            name="Pieces"
+                            rules={[{ required: true, message: 'Please input pieces' }]}
+                            style={{ width: '10%' }} 
+                        >
+                            <Input placeholder="Pieces" />
+                        </Form.Item>
+    
+                        <Form.Item
+                            name="Weight"
+                            rules={[{ required: true, message: 'Please input weight' }]}
+                            style={{ width: '10%' }} 
+                        >
+                            <Input placeholder="Weight" />
+                        </Form.Item>
+    
+                        <Form.Item
+                            name="Volume"
+                            rules={[{ required: true, message: 'Please input volume' }]}
+                            style={{ width: '10%' }} 
+                        >
+                            <Input placeholder="Volume" />
+                        </Form.Item>
+    
+                        <Form.Item>
+                            <Button style={{backgroundColor: '#5cb85c', color: 'white'}}   htmlType="submit">
+                                Enviar
+                            </Button>
+                        </Form.Item>
+                    </Form>
+                </div>
+                }
 
                 <Button 
                     type="primary"
                     size='small'
                     onClick={showPopconfirm} 
                     style={{
-                        marginLeft: 630
+                        marginLeft: 900
                     }} 
                 >
                  SELECT
                  </Button>
-            </Popconfirm>
+           
 
         </>
     )

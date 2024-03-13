@@ -70,7 +70,7 @@ export const Reserva = () => {
                     rules={[
                         {
                             required: true,
-                            message: 'Please input',
+                            message: 'Please input an AWB Number',
                         },
                         {min: 8}
                     ]}

@@ -1,13 +1,14 @@
 import React, {useState} from 'react';
-import { Button, Form, Input } from 'antd'
+import { Button, Divider, Form, Input } from 'antd'
 import { Availability } from '../../api/Availability';
 import { ListadoVuelos } from '../vuelos/listadoVuelos';
+import { Ejemplo } from '../vuelos/Ejemplo';
 
 let reserva = {};
 
 export const Formulario = () => { 
 
-    const [ listado, setlistado ] = useState([]);
+    const [ listado, setlistado ] = useState([]);  
 
     // funcion para activar el formulario
     const onFinish = ({originAirportCode, destinationAirportCode, weight, Date, natureOfGoods, pieces }) => {     
@@ -186,8 +187,12 @@ export const Formulario = () => {
                 </Form.Item> 
                
             </Form>
-                {
+            <Divider />
+                {/* {
                     (listado.length > 0) ? <ListadoVuelos listado={listado} reserva={reserva}/> : ''            
+                }             */}
+                {
+                    (listado.length > 0) ? <Ejemplo listado={listado} reserva={reserva}/>  : ''            
                 }            
         </div>
     </>
