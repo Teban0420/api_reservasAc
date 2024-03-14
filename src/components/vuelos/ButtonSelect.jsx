@@ -5,48 +5,42 @@ import {  useMemo, useState} from 'react';
 import { infoReserva } from './helpers/infoReserva';
 import { Bookings } from '../../api/Bookings';
 
+let todos_vuelos = [];
 
-export const BtnSelect = ({segment, reserva}) => {    
+export const BtnSelect = ({segment, reserva}) => {
 
     const navigate = useNavigate();    
-    const datos = useMemo( () => infoReserva(reserva, segment), [segment]);   
-    
-    const [open, setOpen] = useState(false);
-    const [confirmLoading, setConfirmLoading] = useState(false);
+    const [vuelo_recibido, setvuelo_recibido] = useState(segment);
+    const [reserva_recibida, setreserva_recibida] = useState(reserva);   
+
     const [ mostrar, setMostrar ] = useState(false);
             
-    const showPopconfirm = () => {
-        // setOpen(true);
+    const showPopconfirm = () => {       
         setMostrar(!mostrar);
     };
-    
-    const handleOk = () => {
-        setConfirmLoading(true);
 
-        crearReserva(datos);        
+    const onFinish = (values) => {        
+        
+        setvuelo_recibido({
+            ...vuelo_recibido,
+            pieces: values.Pieces,
+            weight: {amount: values.Weight, unit: 'LB'},
+            volume: {amount: values.Volume, unit: 'MC'}            
+        }); 
     
-        setTimeout(() => {
-          setOpen(false);
-          setConfirmLoading(false);
-        }, 2000);
-    };
+        todos_vuelos.push(vuelo_recibido);
     
-    const handleCancel = () => {        
-        setOpen(false);
-    };
+        setreserva_recibida({
+            ...reserva_recibida,
+            'segments': todos_vuelos
+        });
+    }
 
-    const onFinish = (values) => {
-        console.log('Success:', values);
-      };
-      const onFinishFailed = (errorInfo) => {
-        console.log('Failed:', errorInfo);
-      };
-
-    const crearReserva = async (reserva) => {
+    const btn_crear_reserva = async () => {
         
         try {
             
-            const respuesta = await Bookings.post('v2', reserva);
+            const respuesta = await Bookings.post('v2', reserva_recibida);            
 
             if(respuesta.status == 200){
                 navigate('/formulario');
@@ -56,21 +50,20 @@ export const BtnSelect = ({segment, reserva}) => {
             console.log(error);
         }
     }
-    
+
     return(
         <>      
            <br />
                 {
-                    (mostrar) && <div 
+                    (mostrar) && <><div 
                         style={{
                             display: 'flex', 
                             flexDirection: 'row',  
-                            justifyContent: 'flex-start', 
-                            
+                            justifyContent: 'flex-start',                             
                         }}
                 >
-                        <Form
-                            name="oneLineForm"
+                        <Form                            
+                            name={segment.transportMeans.id}
                             layout="inline"
                             onFinish={onFinish}
                             style={{ display: 'flex', gap: '2px', alignItems: 'flex-end' }}
@@ -99,14 +92,26 @@ export const BtnSelect = ({segment, reserva}) => {
                         >
                             <Input placeholder="Volume" />
                         </Form.Item>
+
+                        <Form.Item name="id">
+                            <Input  type='hidden' value={segment.transportMeans.id} />
+                        </Form.Item>
     
                         <Form.Item>
-                            <Button style={{backgroundColor: '#5cb85c', color: 'white'}}   htmlType="submit">
+                            <Button style={{backgroundColor: '#5cb85c', color: 'white'}}   
+                                    htmlType="submit">
+                                Confirm
+                            </Button>
+                            <Button style={{backgroundColor: '#5cb85c', color: 'white'}}   
+                                    htmlType="submit"
+                                    onClick={btn_crear_reserva}
+                            >
                                 Enviar
                             </Button>
                         </Form.Item>
                     </Form>
                 </div>
+                </>
                 }
 
                 <Button 
@@ -120,7 +125,19 @@ export const BtnSelect = ({segment, reserva}) => {
                  SELECT
                  </Button>
            
-
         </>
     )
 }
+
+
+    // const datos = useMemo( () => infoReserva(reserva, segment), [segment]);  
+    
+   
+
+
+      
+
+    
+    
+   
+ 

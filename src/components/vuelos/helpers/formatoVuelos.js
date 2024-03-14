@@ -45,7 +45,7 @@ export const formatoVuelos = ( listado = {}, reserva = {}) => {
                                     <br />                                
                                     {e.transportMeans.scheduledArrival}                                                                  
                                     <br />                                
-                                     <BtnSelect  segment={ objeto.vuelo_completo } reserva={reserva}/>                            
+                                     <BtnSelect  key={e.transportMeans.id} segment={ objeto.vuelo_completo } reserva={reserva}/>                            
                                  </p> 
                                                                      
         });
