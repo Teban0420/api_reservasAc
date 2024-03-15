@@ -30,7 +30,7 @@ export const formatoVuelos = ( listado = {}, reserva = {}) => {
             objeto.key = Math.floor(Math.random() * (100- 1 + 1) + 1) 
             objeto.vuelo_completo = e    
 
-            objeto.label = <p> 
+            objeto.label = <span> 
                                 <strong style={{color: 'rgba(0,0,0,0.8)'}}> 
                                     {e.onload.code}-{e.offload.code}
                                 </strong> 
@@ -38,15 +38,15 @@ export const formatoVuelos = ( listado = {}, reserva = {}) => {
                                 <span>
                                     {e.transportMeans.reference}
                                 </span>
-                            </p> 
+                            </span> 
 
-                objeto.children =  <p>
+                objeto.children =  <span>
                                     {e.transportMeans.scheduledDeparture}     
                                     <br />                                
                                     {e.transportMeans.scheduledArrival}                                                                  
                                     <br />                                
                                      <BtnSelect  key={e.transportMeans.id} segment={ objeto.vuelo_completo } reserva={reserva}/>                            
-                                 </p> 
+                                 </span> 
                                                                      
         });
         

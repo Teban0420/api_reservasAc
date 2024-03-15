@@ -1,15 +1,17 @@
 
 import { useNavigate } from 'react-router-dom';
 import { Button, Popconfirm, Form, Input } from 'antd';
-import {  useMemo, useState} from 'react';
+import {  useContext, useMemo, useState} from 'react';
 import { infoReserva } from './helpers/infoReserva';
 import { Bookings } from '../../api/Bookings';
+import { ReservaContext } from '../reservas/ReservaContext/ReservaContext';
 
 let todos_vuelos = [];
 
 export const BtnSelect = ({segment, reserva}) => {
 
     const navigate = useNavigate();    
+    const [ reservaInicial, setReservaInicial ] = useContext(ReservaContext);
     const [vuelo_recibido, setvuelo_recibido] = useState(segment);
     const [reserva_recibida, setreserva_recibida] = useState(reserva);   
 
@@ -20,20 +22,23 @@ export const BtnSelect = ({segment, reserva}) => {
     };
 
     const onFinish = (values) => {        
-        
+               
         setvuelo_recibido({
             ...vuelo_recibido,
             pieces: values.Pieces,
             weight: {amount: values.Weight, unit: 'LB'},
             volume: {amount: values.Volume, unit: 'MC'}            
-        }); 
-    
-        todos_vuelos.push(vuelo_recibido);
+        });
+        
+        todos_vuelos.push(vuelo_recibido);       
     
         setreserva_recibida({
             ...reserva_recibida,
             'segments': todos_vuelos
-        });
+        });     
+
+        setReservaInicial(reserva_recibida); 
+                
     }
 
     const btn_crear_reserva = async () => {
@@ -101,13 +106,7 @@ export const BtnSelect = ({segment, reserva}) => {
                             <Button style={{backgroundColor: '#5cb85c', color: 'white'}}   
                                     htmlType="submit">
                                 Confirm
-                            </Button>
-                            <Button style={{backgroundColor: '#5cb85c', color: 'white'}}   
-                                    htmlType="submit"
-                                    onClick={btn_crear_reserva}
-                            >
-                                Enviar
-                            </Button>
+                            </Button>                           
                         </Form.Item>
                     </Form>
                 </div>
