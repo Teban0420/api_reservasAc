@@ -1,4 +1,6 @@
 
+import { Button, Modal } from 'antd';
+import { BtnEnviarReserva } from "../../reservas/BtnEnviarReserva";
 import { BtnSelect } from "../ButtonSelect";
 
 /*
@@ -11,6 +13,7 @@ export const formatoVuelos = ( listado = {}, reserva = {}) => {
     // tomo los segments ahi se encuentra informacion de los vuelos
     let items = [];
     let segment = []; 
+    let boton = '';
     
     listado.forEach( (vuelo, i) => {
 
@@ -50,8 +53,8 @@ export const formatoVuelos = ( listado = {}, reserva = {}) => {
                                                                      
         });
         
-        items.push(objeto);               
-    
+        items.push(objeto);       
+        
     });
 
     return items;

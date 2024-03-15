@@ -1,18 +1,16 @@
-import React, {useContext, useState} from 'react';
+import React, {useState} from 'react';
 import { Button, Divider, Form, Input } from 'antd'
 import { Availability } from '../../api/Availability';
-import { ListadoVuelos } from '../vuelos/listadoVuelos';
+// import { ListadoVuelos } from '../vuelos/listadoVuelos';
 import { Ejemplo } from '../vuelos/Ejemplo';
-import { ReservaContext } from './ReservaContext/ReservaContext';
-import { BtnEnviarReserva } from './BtnEnviarReserva';
+
 
 let reserva = {};
 
 export const Formulario = () => { 
 
-    const [ listado, setlistado ] = useState([]);  
-    const [ reservaInicial, setReservaInicial ] = useContext(ReservaContext); 
-    
+    const [ listado, setlistado ] = useState([]);    
+     
     // funcion para activar el formulario
     const onFinish = ({originAirportCode, destinationAirportCode, weight, Date, natureOfGoods, pieces }) => {     
        
@@ -189,19 +187,14 @@ export const Formulario = () => {
                 
                 </Form.Item> 
                
-            </Form>
-
-            {
-                (Object.keys(reservaInicial).length > 0) && <BtnEnviarReserva /> 
-            }
+            </Form>          
           
             <Divider />
-                {/* {
-                    (listado.length > 0) ? <ListadoVuelos listado={listado} reserva={reserva}/> : ''            
-                }             */}
+           
                 {
                     (listado.length > 0) ? <Ejemplo listado={listado} reserva={reserva}/>  : ''            
-                }            
+                }  
+    
         </div>
     </>
     )

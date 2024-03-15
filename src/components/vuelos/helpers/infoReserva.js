@@ -1,9 +1,8 @@
 
-export const infoReserva = (datos, segment)  => {
+export const infoReserva = (datos)  => {
 
     const newData = {
-        ...datos,
-        'segments': [segment]
+        ...datos
     }
 
     return newData;

@@ -1,25 +1,47 @@
-import { Button, Modal } from 'antd';
-import { useContext, useState } from 'react';
-import { ReservaContext } from './ReservaContext/ReservaContext';
+import { Button, Modal, List } from 'antd';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { Bookings } from '../../api/Bookings';
 
 
-export const BtnEnviarReserva = () => {
-
-    const [ reservaInicial, setReservaInicial ] = useContext(ReservaContext);
+export const BtnEnviarReserva = () => { 
+    
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const navigate = useNavigate()
 
+    let reserva = localStorage.getItem('reserva_final');
+    reserva = JSON.parse(reserva);
+
+    const mostrar = reserva != null ? true : null;    
+  
     const showModal = () => {
-      setIsModalOpen(true);
-      console.log(reservaInicial.segments)
+      setIsModalOpen(true);     
     };
     
     const handleOk = () => {
-        setIsModalOpen(false);        
+        btn_crear_reserva();
+        setIsModalOpen(false);   
+        
     };
 
     const handleCancel = () => {
       setIsModalOpen(false);
     };
+
+    const btn_crear_reserva = async () => {
+        
+        try {
+            
+            const respuesta = await Bookings.post('v2', reserva);            
+
+            if(respuesta.status == 200){
+                navigate('/formulario');
+            }
+
+        } catch (error) {
+            console.log(error);
+        }
+    }
 
     return(
 
@@ -36,33 +58,32 @@ export const BtnEnviarReserva = () => {
                 htmlType="submit" 
                 onClick={showModal}                                       
             >
-            Enviar
+                Enviar
             </Button>
+
 
             <Modal title="BOOKING" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
                 <br />
-                <p> <strong>Origin-Dest:</strong> {reservaInicial.originAirportCode} - {reservaInicial.destinationAirportCode}</p>
-                <p> <strong>Account number:</strong> {reservaInicial.agentAccountNumber}</p>
-                <p> <strong>natureOfGoods:</strong> {reservaInicial.natureOfGoods}</p>
-                <p> <strong>weight:</strong> {reservaInicial.weight.amount} LB</p>
-                <p> <strong>Pieces:</strong> {reservaInicial.pieces} </p>
-                <span> 
-                    <strong>Fligths:</strong> 
-                        {
-                            reservaInicial.segments.map( vuelo => (
-                                <p> {vuelo.onload.code} - {vuelo.offload.code} 
-                                    {vuelo.transportMeans.reference} {vuelo.transportMeans.date} 
-                                    pieces: {vuelo.pieces}
-                                    weight: {vuelo.weight.amount}
-                                    volume: {vuelo.volume.amount}
-                                </p>
-                                                              
-                            ))
-                        }                                  
-                </span>
                
-                {/* <span>
-                </span> */}
+                <p> <strong>Origin-Dest:</strong> {reserva.originAirportCode} - {reserva.destinationAirportCode}</p>
+                <p> <strong>Account number:</strong> {reserva.agentAccountNumber}</p>
+                <p> <strong>natureOfGoods:</strong> {reserva.natureOfGoods}</p>
+                <p> <strong>weight:</strong> {(reserva.weight.amount) ? reserva.weight.amount : ''} LB</p>
+                <p> <strong>Pieces:</strong> {reserva.pieces} </p>               
+                <p> <strong>Fligths:</strong></p> 
+
+                <List  className="demo-loadmore-list" itemLayout="horizontal" dataSource={reserva.segments}
+                    renderItem={(item) => (
+                        <List.Item >        
+                            <span>
+                                    {item.onload.code} - {item.offload.code} &nbsp;
+                                    {item.transportMeans.reference} {item.transportMeans.date} &nbsp;
+                                    pieces: {item.pieces}  
+                            </span>       
+                        </List.Item>
+                    )}
+                />                                                    
+               
             </Modal>
         </div>
     )
