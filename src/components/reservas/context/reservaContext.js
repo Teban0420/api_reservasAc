@@ -4,7 +4,7 @@ export const ReservaContext = React.createContext([{}, () => {}]);
 
 export const ReservaProvider = props => {
 
-    const [reserva_init, setReserva_init] = useState({});
+    const [reserva_init, setReserva_init] = useState({}); 
 
     return (
         < ReservaContext.Provider value={[reserva_init, setReserva_init]}> 

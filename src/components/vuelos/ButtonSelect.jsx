@@ -1,6 +1,7 @@
 
-import { Button, Form, Input } from 'antd';
 import { useContext, useEffect, useState} from 'react';
+import { Button, Form, Input } from 'antd';
+import { RightSquareTwoTone } from '@ant-design/icons'
 import { ReservaContext } from '../reservas/context/reservaContext';
 
 let newListadoVuelos = [];
@@ -11,7 +12,8 @@ export const BtnSelect = ({segment, reserva}) => {
     const [reserva_init, setReserva_init] = useContext(ReservaContext);   
     const [ mostrar, setMostrar ] = useState(false);
     const [ todos_vuelos, Settodos_vuelos ] = useState([]);
-            
+
+             
     const showPopconfirm = () => {       
         setMostrar(!mostrar);
     };
@@ -100,17 +102,14 @@ export const BtnSelect = ({segment, reserva}) => {
                 </div>
                 </>
                 }
-
-                <Button 
-                    type="primary"
-                    size='small'
-                    onClick={showPopconfirm} 
+                
+                 <RightSquareTwoTone 
+                    className='icono' 
                     style={{
-                        marginLeft: 900
-                    }} 
-                >
-                 SELECT
-                 </Button>
+                        marginLeft: 900,                                              
+                    }}  
+                    onClick={showPopconfirm} 
+                />
            
         </>
     )

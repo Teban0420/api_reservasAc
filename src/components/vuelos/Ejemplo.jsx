@@ -22,9 +22,7 @@ export const Ejemplo = ({listado, reserva}) => {
           </List.Item>
         )}
     />
-
-       
-       
+   
     </>
   );
 };

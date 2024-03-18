@@ -1,7 +1,6 @@
 
-import { Button, Modal } from 'antd';
-import { BtnEnviarReserva } from "../../reservas/BtnEnviarReserva";
 import { BtnSelect } from "../ButtonSelect";
+
 
 /*
     funcion para recorrer el objeto inicial y dar formato 
@@ -14,7 +13,7 @@ export const formatoVuelos = ( listado = {}, reserva = {}) => {
     let items = [];
     let segment = []; 
     let boton = '';
-    
+  
     listado.forEach( (vuelo, i) => {
 
         let objeto = {
@@ -34,7 +33,7 @@ export const formatoVuelos = ( listado = {}, reserva = {}) => {
             objeto.vuelo_completo = e    
 
             objeto.label = <span> 
-                                <strong style={{color: 'rgba(0,0,0,0.8)'}}> 
+                                <strong style={{color: 'rgba(0,0,0,0.8)'}} onClick={onclick}> 
                                     {e.onload.code}-{e.offload.code}
                                 </strong> 
                                 &nbsp;
@@ -48,7 +47,12 @@ export const formatoVuelos = ( listado = {}, reserva = {}) => {
                                     <br />                                
                                     {e.transportMeans.scheduledArrival}                                                                  
                                     <br />                                
-                                     <BtnSelect  key={e.transportMeans.id} segment={ objeto.vuelo_completo } reserva={reserva}/>                            
+                                     <BtnSelect  
+                                            key={e.transportMeans.id} 
+                                            segment={ objeto.vuelo_completo } 
+                                            reserva={reserva}
+                                            
+                                    />                            
                                  </span> 
                                                                      
         });
