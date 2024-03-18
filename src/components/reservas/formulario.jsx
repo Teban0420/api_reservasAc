@@ -3,6 +3,7 @@ import { Button, Divider, Form, Input } from 'antd'
 import { Availability } from '../../api/Availability';
 // import { ListadoVuelos } from '../vuelos/listadoVuelos';
 import { Ejemplo } from '../vuelos/Ejemplo';
+import { BtnEnviarReserva } from './BtnEnviarReserva';
 
 
 let reserva = {};
@@ -194,7 +195,7 @@ export const Formulario = () => {
                 {
                     (listado.length > 0) ? <Ejemplo listado={listado} reserva={reserva}/>  : ''            
                 }  
-    
+                <BtnEnviarReserva />
         </div>
     </>
     )

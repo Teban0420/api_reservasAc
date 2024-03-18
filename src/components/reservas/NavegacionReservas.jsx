@@ -8,6 +8,7 @@ import { Layout, Menu, Button, theme } from 'antd';
 
 import { ApiContext } from '../../context/ApiContext';
 import { Formulario, Reserva, Home } from './index';
+import { ReservaProvider } from './context/reservaContext';
 
 
 const { Header, Sider, Content } = Layout;
@@ -114,11 +115,13 @@ export const NavegacionReservas = () => {
               }}
             >
   
+              <ReservaProvider>
                 <Routes>
                   <Route path='/' Component={Home}/>             
                   <Route path='/new' Component={Formulario}/>             
                   <Route path='/tracking' Component={Reserva}/>             
                 </Routes>              
+              </ReservaProvider>
               
             </Content>
       </Layout>

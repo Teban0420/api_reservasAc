@@ -1,18 +1,16 @@
 import { Button, Modal, List } from 'antd';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Bookings } from '../../api/Bookings';
+import { ReservaContext } from './context/reservaContext';
 
 
 export const BtnEnviarReserva = () => { 
     
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const navigate = useNavigate()
+    const navigate = useNavigate(); 
 
-    let reserva = localStorage.getItem('reserva_final');
-    reserva = JSON.parse(reserva);
-
-    const mostrar = reserva != null ? true : null;    
+    const [reserva_init, setReserva_init] = useContext(ReservaContext);
   
     const showModal = () => {
       setIsModalOpen(true);     
@@ -20,8 +18,7 @@ export const BtnEnviarReserva = () => {
     
     const handleOk = () => {
         btn_crear_reserva();
-        setIsModalOpen(false);   
-        
+        setIsModalOpen(false);       
     };
 
     const handleCancel = () => {
@@ -29,10 +26,9 @@ export const BtnEnviarReserva = () => {
     };
 
     const btn_crear_reserva = async () => {
-        
-        try {
-            
-            const respuesta = await Bookings.post('v2', reserva);            
+
+        try {            
+            const respuesta = await Bookings.post('v2', reserva_init);            
 
             if(respuesta.status == 200){
                 navigate('/formulario');
@@ -64,25 +60,33 @@ export const BtnEnviarReserva = () => {
 
             <Modal title="BOOKING" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
                 <br />
-               
-                <p> <strong>Origin-Dest:</strong> {reserva.originAirportCode} - {reserva.destinationAirportCode}</p>
-                <p> <strong>Account number:</strong> {reserva.agentAccountNumber}</p>
-                <p> <strong>natureOfGoods:</strong> {reserva.natureOfGoods}</p>
-                <p> <strong>weight:</strong> {(reserva.weight.amount) ? reserva.weight.amount : ''} LB</p>
-                <p> <strong>Pieces:</strong> {reserva.pieces} </p>               
-                <p> <strong>Fligths:</strong></p> 
 
-                <List  className="demo-loadmore-list" itemLayout="horizontal" dataSource={reserva.segments}
-                    renderItem={(item) => (
-                        <List.Item >        
-                            <span>
-                                    {item.onload.code} - {item.offload.code} &nbsp;
-                                    {item.transportMeans.reference} {item.transportMeans.date} &nbsp;
-                                    pieces: {item.pieces}  
-                            </span>       
-                        </List.Item>
-                    )}
-                />                                                    
+                {
+                    (reserva_init !== null) && <> 
+                        <p> <strong>Origin-Dest:</strong> {reserva_init.originAirportCode} - {reserva_init.destinationAirportCode}</p>
+                        <p> <strong>Account number:</strong> {reserva_init.agentAccountNumber}</p>
+                        <p> <strong>natureOfGoods:</strong> {reserva_init.natureOfGoods}</p>
+                        <p> <strong>weight:</strong> {reserva_init.weight?.amount} LB</p>
+                        <p> <strong>Pieces:</strong> {reserva_init.pieces} </p>               
+                        <p> <strong>Fligths:</strong></p> 
+    
+                        <List  className="demo-loadmore-list" itemLayout="horizontal" dataSource={reserva_init.segments}
+                            renderItem={(item) => (
+                                <List.Item >        
+                                    <span>
+                                            {item.onload.code} - {item.offload.code} &nbsp;
+                                            {item.transportMeans.reference} {item.transportMeans.date} &nbsp;
+                                            pieces: {item.pieces}  &nbsp;
+                                            weight: {item.weight.amount}  &nbsp;
+                                            volume: {item.volume.amount}  
+                                    </span>       
+                                </List.Item>
+                            )}
+                        />  
+                    </>               
+                    
+                }
+                                                
                
             </Modal>
         </div>

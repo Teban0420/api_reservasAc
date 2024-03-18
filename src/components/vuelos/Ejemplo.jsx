@@ -1,16 +1,12 @@
 import { useMemo} from 'react';
 import {List } from 'antd';
 import { formatoVuelos } from './helpers/formatoVuelos';
-import { BtnEnviarReserva } from '../reservas/BtnEnviarReserva';
 
 
 export const Ejemplo = ({listado, reserva}) => {
 
   const vuelos = useMemo( () => formatoVuelos(listado, reserva), [listado]);  
 
-  let reserva_final = localStorage.getItem('reserva_final');
-  reserva_final = JSON.parse(reserva_final);
-   
   return (
     <>    
     <List
@@ -27,10 +23,8 @@ export const Ejemplo = ({listado, reserva}) => {
         )}
     />
 
-    {
-      (!reserva_final == '') && <BtnEnviarReserva />
-    }
-      
+       
+       
     </>
   );
 };

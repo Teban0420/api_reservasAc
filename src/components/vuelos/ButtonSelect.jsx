@@ -1,45 +1,52 @@
 
 import { Button, Form, Input } from 'antd';
-import { useState} from 'react';
+import { useContext, useEffect, useState} from 'react';
+import { ReservaContext } from '../reservas/context/reservaContext';
 
-
-let todos_vuelos = [];
+let newListadoVuelos = [];
 
 export const BtnSelect = ({segment, reserva}) => {
-
       
     const [vuelo_recibido, setvuelo_recibido] = useState(segment);
-    const [reserva_recibida, setreserva_recibida] = useState(reserva);  
-   
+    const [reserva_init, setReserva_init] = useContext(ReservaContext);   
     const [ mostrar, setMostrar ] = useState(false);
+    const [ todos_vuelos, Settodos_vuelos ] = useState([]);
             
     const showPopconfirm = () => {       
         setMostrar(!mostrar);
     };
 
-    const onFinish = (values) => {      
+    const onFinish = (values) => {  
         
-        setvuelo_recibido({
+        let nuevo_vuelo_recibido = {
             ...vuelo_recibido,
             pieces: values.Pieces,
             weight: {amount: values.Weight, unit: 'LB'},
-            volume: {amount: values.Volume, unit: 'MC'}            
-        });
-
-        todos_vuelos.push(vuelo_recibido);       
-        
-        setreserva_recibida({
-            ...reserva_recibida,
-            'segments': todos_vuelos
-        });    
-        
-        guardarReserva(reserva_recibida);          
+            volume: {amount: values.Volume, unit: 'MC'} 
+        }
+                    
+        newListadoVuelos.push(nuevo_vuelo_recibido);       
+      
+        let newReserva = {
+            ...reserva,
+            'segments': newListadoVuelos
+        }
+            
+        setReserva_init(newReserva);                   
+ 
     }
 
-    const guardarReserva = (reserva_final) => {
-        
-        localStorage.setItem('reserva_final', JSON.stringify(reserva_final));
-    }
+    useEffect( () => {     
+                 
+    }, [vuelo_recibido])
+
+    useEffect( () => {
+
+    }, [todos_vuelos])
+
+    useEffect( () => {  
+
+    }, [reserva_init]);
 
     return(
         <>      
@@ -81,10 +88,6 @@ export const BtnSelect = ({segment, reserva}) => {
                             style={{ width: '10%' }} 
                         >
                             <Input placeholder="Volume" />
-                        </Form.Item>
-
-                        <Form.Item name="id">
-                            <Input  type='hidden' value={segment.transportMeans.id} />
                         </Form.Item>
     
                         <Form.Item>
