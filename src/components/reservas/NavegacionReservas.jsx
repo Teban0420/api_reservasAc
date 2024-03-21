@@ -7,7 +7,7 @@ import { MenuFoldOutlined, MenuUnfoldOutlined, UploadOutlined,
 import { Layout, Menu, Button, theme } from 'antd';
 
 import { ApiContext } from '../../context/ApiContext';
-import { Formulario, Reserva, Home } from './index';
+import { Formulario, Reserva, Home, ListBookings, Booking } from './index';
 import { ReservaProvider } from './context/reservaContext';
 
 
@@ -59,15 +59,15 @@ export const NavegacionReservas = () => {
               key: '2',
               icon: <RightSquareTwoTone />,
             },
-            {
-              label: <Link to="/formulario/tracking">Tracking</Link>,
+            {              
+              label: <Link to="/formulario/bookings">Bookings</Link>,
               key: '3',
-              icon: <CalendarOutlined />,
+              icon: <UploadOutlined />,
             },
             {
+              label: <Link to="/formulario/tracking">Tracking</Link>,
               key: '4',
-              icon: <UploadOutlined />,
-              label: 'nav 3',
+              icon: <CalendarOutlined />,
             },
           ]}
         />
@@ -119,6 +119,8 @@ export const NavegacionReservas = () => {
                 <Routes>
                   <Route path='/' Component={Home}/>             
                   <Route path='/new' Component={Formulario}/>             
+                  <Route path='/bookings' Component={ListBookings}/>             
+                  <Route path='/booking/:id' Component={Booking}/>             
                   <Route path='/tracking' Component={Reserva}/>             
                 </Routes>              
               </ReservaProvider>

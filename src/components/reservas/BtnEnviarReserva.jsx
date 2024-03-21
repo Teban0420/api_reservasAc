@@ -28,9 +28,16 @@ export const BtnEnviarReserva = () => {
     const btn_crear_reserva = async () => {
 
         try {            
-            const respuesta = await Bookings.post('v2', reserva_init);            
+            const respuesta = await Bookings.post('v2', reserva_init);   
+            
+            console.log(respuesta.data)
+            return
 
             if(respuesta.status == 200){
+
+                // TODO:  actualizar estado del context
+
+                // mostrar datos de la reserva creada 
                 navigate('/formulario');
             }
 

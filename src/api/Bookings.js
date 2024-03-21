@@ -6,4 +6,4 @@ export const Bookings = axios.create({
         apikey: 'EnbX12j02DDHFrAoqjaq3FIkmTGncrrk',
         Accept: 'application/json'
     } 
-}); 
+});  

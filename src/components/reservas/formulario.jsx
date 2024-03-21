@@ -1,7 +1,6 @@
 import React, {useContext, useState} from 'react';
 import { Button, Divider, Form, Input } from 'antd'
 import { Availability } from '../../api/Availability';
-// import { ListadoVuelos } from '../vuelos/listadoVuelos';
 import { Ejemplo } from '../vuelos/Ejemplo';
 import { BtnEnviarReserva } from './BtnEnviarReserva';
 import { ReservaContext } from './context/reservaContext';
@@ -111,18 +110,23 @@ export const Formulario = () => {
 
                 <Form.Item
                     label='Weight (LB)'
-                    name='weight'
+                    name='weight'                    
                     rules={[
                         {
                             required: true,
-                            message: 'Please input weight',
+                            message: 'Please input weight',                           
                         },
+                        {
+                            pattern: /^[0-9]+$/,
+                            message: 'can only include numbers.',
+                        },                   
+                       
                     ]}
                     hasFeedback
                 >
 
                 <Input 
-                    type='text' 
+                    type='text'                     
                     placeholder='Weight (LB)*'                       
                 />
 
@@ -166,6 +170,10 @@ export const Formulario = () => {
                         {
                             required: true,
                             message: 'Please input',
+                        },
+                        {
+                            pattern: /^[0-9]+$/,
+                            message: 'can only include numbers.',
                         },
                         {max: 3}
                     ]}
