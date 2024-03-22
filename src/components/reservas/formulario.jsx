@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useState, useEffect} from 'react';
 import { Button, Divider, Form, Input } from 'antd'
 import { Availability } from '../../api/Availability';
 import { Ejemplo } from '../vuelos/Ejemplo';
@@ -11,7 +11,8 @@ let reserva = {};
 export const Formulario = () => { 
 
     const [ listado, setlistado ] = useState([]); 
-    const [reserva_init, setReserva_init] = useContext(ReservaContext); 
+    const [reserva_init, setReserva_init] = useContext(ReservaContext);  
+    
        
     // funcion para activar el formulario
     const onFinish = ({originAirportCode, destinationAirportCode, weight, Date, natureOfGoods, pieces }) => {     
@@ -25,19 +26,19 @@ export const Formulario = () => {
             weight: weight
         }
 
-         reserva = {
-            'agentAccountNumber': '00000001116',
-            'airWaybill': {
-                'prefix': "279",
-                'referenceType': 'AIR WAYBILL'
+        setReserva_init({
+            agentAccountNumber: '00000001116',
+            airWaybill: {
+                prefix: "279",
+                referenceType: 'AIR WAYBILL'
             },
-            'destinationAirportCode': destinationAirportCode,
-            'natureOfGoods': natureOfGoods,
-            'originAirportCode': originAirportCode,
-            'pieces': pieces,
-            'segments': [],
-            'weight':{'amount':weight, 'unit': 'LB' }
-        }
+            destinationAirportCode: destinationAirportCode,
+            natureOfGoods: natureOfGoods,
+            originAirportCode: originAirportCode,
+            pieces: pieces,
+            segments: [],
+            weight:{ amount:weight, unit: 'LB' }
+        })
                         
         vuelos(availability); 
 
@@ -193,7 +194,7 @@ export const Formulario = () => {
                         type="primary"
                         htmlType="submit"                                        
                     >
-                    Search Flights
+                        Search Flights
                     </Button>
                 
                 </Form.Item> 
@@ -203,7 +204,8 @@ export const Formulario = () => {
             <Divider />
            
                 {
-                    (listado.length > 0) ? <Ejemplo listado={listado} reserva={reserva}/>  : ''            
+                    // (listado.length > 0) ? <Ejemplo listado={listado} />  : ''            
+                    (listado.length > 0) ? <Ejemplo listado={listado} reserva={reserva_init}/>  : ''            
                 } 
                 {
                     (Object.values(reserva_init).length > 0) && <BtnEnviarReserva />

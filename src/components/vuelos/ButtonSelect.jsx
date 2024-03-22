@@ -7,12 +7,11 @@ import { ReservaContext } from '../reservas/context/reservaContext';
 let newListadoVuelos = [];
 
 export const BtnSelect = ({segment, reserva}) => {
-      
+    
     const [vuelo_recibido, setvuelo_recibido] = useState(segment);
     const [reserva_init, setReserva_init] = useContext(ReservaContext);   
     const [ mostrar, setMostrar ] = useState(false);
-    const [ todos_vuelos, Settodos_vuelos ] = useState([]);
-
+    const [ todos_vuelos, Settodos_vuelos ] = useState([]);    
              
     const showPopconfirm = () => {       
         setMostrar(!mostrar);
@@ -31,13 +30,14 @@ export const BtnSelect = ({segment, reserva}) => {
       
         let newReserva = {
             ...reserva,
-            'segments': newListadoVuelos
+            segments: newListadoVuelos
         }
             
-        setReserva_init(newReserva);                   
+        setReserva_init(newReserva);                  
  
     }
 
+    
     useEffect( () => {     
                  
     }, [vuelo_recibido])

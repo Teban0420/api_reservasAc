@@ -5,7 +5,8 @@ import { formatoVuelos } from './helpers/formatoVuelos';
 
 export const Ejemplo = ({listado, reserva}) => {
 
-  const vuelos = useMemo( () => formatoVuelos(listado, reserva), [listado]);  
+  // const vuelos = useMemo( () => formatoVuelos(listado, reserva), [listado]);  
+  const vuelos = useMemo( () => formatoVuelos(listado, reserva));  
 
   return (
     <>    
