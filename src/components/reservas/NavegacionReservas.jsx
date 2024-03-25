@@ -120,7 +120,7 @@ export const NavegacionReservas = () => {
                   <Route path='/' Component={Home}/>             
                   <Route path='/new' Component={Formulario}/>             
                   <Route path='/bookings' Component={ListBookings}/>             
-                  <Route path='/booking/:id' Component={Booking}/>             
+                  <Route path='/booking' Component={Booking}/>             
                   <Route path='/tracking' Component={Reserva}/>             
                 </Routes>              
               </ReservaProvider>

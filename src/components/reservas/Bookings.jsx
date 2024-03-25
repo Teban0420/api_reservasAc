@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Button, Divider, Form, Input, InputNumber } from 'antd';
+import { Button, Form } from 'antd';
 import { Bookings } from '../../api/Bookings';
 import { MostrarBookings } from './MostrarBookings';
 

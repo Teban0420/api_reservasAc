@@ -4,67 +4,60 @@ import { useNavigate } from 'react-router-dom';
 import { Bookings } from '../../api/Bookings';
 import { ReservaContext } from './context/reservaContext';
 
-let reserva_a_mostrar = {};
 
 export const BtnEnviarReserva = () => { 
     
     const [reserva_init, setReserva_init] = useContext(ReservaContext); 
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [enviar, setEnviar] = useState(false);
 
     const navigate = useNavigate(); 
-
-    reserva_a_mostrar = reserva_init;
 
     const showModal = () => {
       setIsModalOpen(true);   
     };
     
     const handleOk = () => {
-        btn_crear_reserva();       
+        btn_crear_reserva();      
         setIsModalOpen(false);    
     };
 
     const handleCancel = () => {
       setIsModalOpen(false);
     };
-
-    const actualizarState = () => {
-
-        setReserva_init({ 
-            agentAccountNumber: '',
-            airWaybill: {
-                prefix: "279",
-                referenceType: 'AIR WAYBILL'
-            },
-            destinationAirportCode: '',
-            natureOfGoods: '',
-            originAirportCode: '',
-            pieces: '',
-            segments: [],
-            weight:{ amount: '', unit: 'LB' }
-        }); 
-
-        reserva_a_mostrar = {};        
-    }
     
     const btn_crear_reserva = async () => {
         
-        try {  
-            
-            const respuesta = await Bookings.post('v2', reserva_a_mostrar);            
-            actualizarState();   
+        try {             
+
+            const respuesta = await Bookings.post('v2', reserva_init);  
+
+            setReserva_init({ 
+                agentAccountNumber: '',
+                airWaybill: {
+                    prefix: "279",
+                    referenceType: 'AIR WAYBILL'
+                },
+                destinationAirportCode: '',
+                natureOfGoods: '',
+                originAirportCode: '',
+                pieces: '',
+                segments: [],
+                weight:{ amount: '', unit: 'LB' }
+            }); 
+
             // aun no limpia todos los vuelos
             // sigue mostrando los vuelos anteriores
-            navigate('/formulario');    
+            // navigate('/formulario');          
             
         } catch (error) {
             console.log(error);
         }
     }
 
-    useEffect( () => {}, [reserva_init]);
+    useEffect( () => {
 
+    }, [reserva_init]);
+    
     return(
         <div 
             style={{
@@ -86,17 +79,16 @@ export const BtnEnviarReserva = () => {
             <Modal title="BOOKING" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
                 <br />
 
-                {
-                    
-                    (reserva_a_mostrar !== null) && <> 
-                        <p> <strong>Origin-Dest:</strong> {reserva_a_mostrar.originAirportCode} - {reserva_a_mostrar.destinationAirportCode}</p>
-                        <p> <strong>Account number:</strong> {reserva_a_mostrar.agentAccountNumber}</p>
-                        <p> <strong>natureOfGoods:</strong> {reserva_a_mostrar.natureOfGoods}</p>
-                        <p> <strong>weight:</strong> {reserva_a_mostrar.weight?.amount} LB</p>
-                        <p> <strong>Pieces:</strong> {reserva_a_mostrar.pieces} </p>               
+                {                    
+                    (reserva_init !== null) && <> 
+                        <p> <strong>Origin-Dest:</strong> {reserva_init.originAirportCode} - {reserva_init.destinationAirportCode}</p>
+                        <p> <strong>Account number:</strong> {reserva_init.agentAccountNumber}</p>
+                        <p> <strong>natureOfGoods:</strong> {reserva_init.natureOfGoods}</p>
+                        <p> <strong>weight:</strong> {reserva_init.weight?.amount} LB</p>
+                        <p> <strong>Pieces:</strong> {reserva_init.pieces} </p>               
                         <p> <strong>Fligths:</strong></p> 
     
-                        <List  className="demo-loadmore-list" itemLayout="horizontal" dataSource={reserva_a_mostrar.segments}
+                        <List  className="demo-loadmore-list" itemLayout="horizontal" dataSource={reserva_init.segments}
                             renderItem={(item) => (
                                 <List.Item >        
                                     <span>
@@ -109,11 +101,9 @@ export const BtnEnviarReserva = () => {
                                 </List.Item>
                             )}
                         />  
-                    </>               
-                    
+                    </>                              
                 }
-                                                
-               
+                                                             
             </Modal>
         </div>
     )

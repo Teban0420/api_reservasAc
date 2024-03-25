@@ -33,7 +33,7 @@ export const BtnSelect = ({segment, reserva}) => {
             segments: newListadoVuelos
         }
             
-        setReserva_init(newReserva);                  
+        setReserva_init(newReserva);                 
  
     }
 
