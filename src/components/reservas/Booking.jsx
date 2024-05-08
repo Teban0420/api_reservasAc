@@ -22,15 +22,21 @@ export const Booking = () => {
     
     const bookingObj = JSON.parse(r); 
     const { businessId } = bookingObj;
-
       
     const CancelarBooking = async (id) => {
-        
-        const peticion = await CancelBooking.post(`v2/bookings/${id}/cancellation-requests`);
 
-        if(peticion.status === 204){
-            navigate('/formulario');
+        try {
+            
+            const peticion = await CancelBooking.post(`v2/bookings/${id}/cancellation-requests`);
+    
+            if(peticion.status === 204){
+                navigate('/formulario');
+            }
+            
+        } catch (error) {
+            console.log(error)
         }
+        
     }
 
     return(
@@ -52,7 +58,7 @@ export const Booking = () => {
                 danger
                 style={{marginLeft: '40px'}}
             >
-                Delete
+                Cancel
             </Button>
 
             </Popconfirm>

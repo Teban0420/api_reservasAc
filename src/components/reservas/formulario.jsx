@@ -11,8 +11,9 @@ let reserva = {};
 export const Formulario = () => { 
 
     const [ listado, setlistado ] = useState([]); 
-    const [reserva_init, setReserva_init] = useContext(ReservaContext);  
-    
+    const [ btnEnviarReserva, setBtnEnviarReserva ] = useState(false); 
+
+    const [reserva_init, setReserva_init] = useContext(ReservaContext);   
        
     // funcion para activar el formulario
     const onFinish = ({originAirportCode, destinationAirportCode, weight, Date, natureOfGoods, pieces }) => {     
@@ -205,10 +206,18 @@ export const Formulario = () => {
            
                 {
                     // (listado.length > 0) ? <Ejemplo listado={listado} />  : ''            
-                    (listado.length > 0) ? <Ejemplo listado={listado} reserva={reserva_init}/>  : ''            
+                    (listado.length > 0) ? 
+
+                        <Ejemplo 
+                            listado={listado} 
+                            reserva={reserva_init}
+                            btnEnviarReserva={btnEnviarReserva}
+                            setBtnEnviarReserva={setBtnEnviarReserva}
+                        />  
+                        : ''            
                 } 
                 {
-                    (Object.values(reserva_init).length > 0) && <BtnEnviarReserva />
+                    (btnEnviarReserva) && <BtnEnviarReserva />
                 } 
                 
         </div>

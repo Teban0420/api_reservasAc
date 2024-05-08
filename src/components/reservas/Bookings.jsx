@@ -23,7 +23,7 @@ export const ListBookings = () => {
   
         if(consulta.status === 200){
 
-            setBookings(consulta.data._embedded.bookings);                   
+            setBookings(consulta.data._embedded.bookings);                              
             setMostrar(true);            
         }             
     }

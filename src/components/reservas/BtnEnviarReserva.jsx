@@ -10,53 +10,65 @@ export const BtnEnviarReserva = () => {
     const [reserva_init, setReserva_init] = useContext(ReservaContext); 
     const [isModalOpen, setIsModalOpen] = useState(false);
 
-    const navigate = useNavigate(); 
+    const [cambiarEstado, setCambiarEstado] = useState(false);
+    const navigate = useNavigate();
 
     const showModal = () => {
       setIsModalOpen(true);   
     };
     
     const handleOk = () => {
-        btn_crear_reserva();      
-        setIsModalOpen(false);    
+
+        setCambiarEstado(true)    
+        setIsModalOpen(false);   
     };
 
     const handleCancel = () => {
       setIsModalOpen(false);
     };
-    
-    const btn_crear_reserva = async () => {
+
+    useEffect(() => {
+
+        if(cambiarEstado){
+
+            const btn_crear_reserva = async () => {
         
-        try {             
+                try {  
+                                                
+                    const respuesta = await Bookings.post('v2', reserva_init); 
 
-            const respuesta = await Bookings.post('v2', reserva_init);  
+                    setReserva_init({ 
+                        agentAccountNumber: '',
+                        airWaybill: {
+                            prefix: "279",
+                            referenceType: 'AIR WAYBILL'
+                        },
+                        destinationAirportCode: '',
+                        natureOfGoods: '',
+                        originAirportCode: '',
+                        pieces: '',
+                        segments: [],
+                        weight:{ amount: '', unit: 'LB' }
+                    }); 
 
-            setReserva_init({ 
-                agentAccountNumber: '',
-                airWaybill: {
-                    prefix: "279",
-                    referenceType: 'AIR WAYBILL'
-                },
-                destinationAirportCode: '',
-                natureOfGoods: '',
-                originAirportCode: '',
-                pieces: '',
-                segments: [],
-                weight:{ amount: '', unit: 'LB' }
-            }); 
+                    localStorage.setItem('send', 'ok');                    
+        
+                    navigate('/formulario');                                       
+                    
+                } catch (error) {
+                    console.log(error);
+                }
+               
+            }
 
-            // aun no limpia todos los vuelos
-            // sigue mostrando los vuelos anteriores
-            // navigate('/formulario');          
-            
-        } catch (error) {
-            console.log(error);
+            btn_crear_reserva();
+            setCambiarEstado(false);
         }
-    }
 
-    useEffect( () => {
+    }, [cambiarEstado]);
 
-    }, [reserva_init]);
+    useEffect( () => {}, [reserva_init]);
+
     
     return(
         <div 

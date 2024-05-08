@@ -7,7 +7,7 @@ import { BtnSelect } from "../ButtonSelect";
     a los datos que voy a retornar (para renderizar despues)
 */
 
-export const formatoVuelos = ( listado = [], reserva = {}) => {
+export const formatoVuelos = ( listado = [], reserva = {}, btnEnviarReserva, setBtnEnviarReserva) => {
 
     // tomo los segments ahi se encuentra informacion de los vuelos
     let items = [];
@@ -49,8 +49,9 @@ export const formatoVuelos = ( listado = [], reserva = {}) => {
                                      <BtnSelect  
                                             key={e.transportMeans.id} 
                                             segment={ objeto.vuelo_completo } 
-                                            reserva={reserva}
-                                            
+                                            reserva={reserva}  
+                                            btnEnviarReserva={btnEnviarReserva}
+                                            setBtnEnviarReserva={setBtnEnviarReserva}                                          
                                     />                            
                                  </span> 
                                                                      

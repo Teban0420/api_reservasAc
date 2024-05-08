@@ -3,27 +3,26 @@ import {List } from 'antd';
 import { formatoVuelos } from './helpers/formatoVuelos';
 
 
-export const Ejemplo = ({listado, reserva}) => {
+export const Ejemplo = ({listado, reserva, btnEnviarReserva, setBtnEnviarReserva}) => {
 
   // const vuelos = useMemo( () => formatoVuelos(listado, reserva), [listado]);  
-  const vuelos = useMemo( () => formatoVuelos(listado, reserva));  
+  const vuelos = useMemo( () => formatoVuelos(listado, reserva, btnEnviarReserva, setBtnEnviarReserva));  
 
   return (
     <>    
-    <List
-        className="demo-loadmore-list"     
-        itemLayout="horizontal"      
-        dataSource={vuelos}
-        renderItem={(item) => (
+      <List
+          className="demo-loadmore-list"     
+          itemLayout="horizontal"      
+          dataSource={vuelos}
+          renderItem={(item) => (
 
-          <List.Item >        
-            <div>
-                {item.label} {item.children}
-            </div>       
-          </List.Item>
-        )}
-    />
-   
+            <List.Item >        
+              <div>
+                  {item.label} {item.children} 
+              </div>       
+            </List.Item>
+          )}
+      />   
     </>
   );
 };

@@ -15,7 +15,7 @@ export const ReservaProvider = props => {
         originAirportCode: '',
         pieces: '',
         segments: [],
-        weight:{ amount: '', unit: 'LB' }
+        weight:{ amount: '', unit: 'LB' }        
     }); 
 
     return (
