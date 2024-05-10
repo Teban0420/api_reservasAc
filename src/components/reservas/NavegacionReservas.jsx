@@ -100,7 +100,7 @@ export const NavegacionReservas = () => {
                 marginLeft: '85%'
               }}
             >                      
-              Salir               
+              Log-out              
             </Button>
 
         </Header>

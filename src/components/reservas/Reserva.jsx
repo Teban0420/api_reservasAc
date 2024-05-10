@@ -32,15 +32,16 @@ export const Reserva = () => {
         <>            
             <Form
                 name="horizontal"
-                layout="inline"  
+                layout="inline"
+                size='small'  
                 labelCol={{
-                span: 8,
+                    span: 8,
                 }}
                 wrapperCol={{
-                span: 12,
+                    span: 12,
                 }}
                 style={{
-                maxWidth: 800,
+                    maxWidth: 800,
                 }}
                 initialValues={{
                 remember: true,
@@ -82,12 +83,7 @@ export const Reserva = () => {
 
                 </Form.Item>
            
-                <Form.Item
-                    wrapperCol={{
-                        offset: 8,
-                        span: 16,
-                    }}
-                >
+                <Form.Item >
 
                 <Button type="primary" htmlType="submit">
                     Submit

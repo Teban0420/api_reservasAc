@@ -9,9 +9,7 @@ export const Login = () => {
 
   const [ auth, guardarAuth ] = useContext(ApiContext)
 
-  const navigate = useNavigate()
-
-  // const [ credenciales, guardarCredenciales ] = useState({})
+  const navigate = useNavigate();  
 
   const onFinish = ({username, password}) => {
 
@@ -43,10 +41,10 @@ export const Login = () => {
 
     return(
       <>
-      <div className="container-sm"> 
+      <div className="container"> 
         <div className='formulario'>                
 
-        <Title level={2} >Iniciar Sesión</Title> 
+        <Title level={2} >Login</Title> 
           
           <Form
               name="basic"

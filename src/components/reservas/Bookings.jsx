@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import { Button, Form } from 'antd';
 import { Bookings } from '../../api/Bookings';
 import { MostrarBookings } from './MostrarBookings';
@@ -13,13 +12,14 @@ export const ListBookings = () => {
     const onFinish = ({flightDate}) => {
 
         const url = `/v2/bookings?accountNumbers=00000001116&flightDate=${flightDate}`;
+        // const url = `/v2/bookings?accountNumbers=00000001116&airwaybillPrefixes=279&airwaybillSerial=12345678`;
         consultar(url);
              
     };
     
     const consultar = async (url) => {
         
-        const consulta = await Bookings.get(url);        
+        const consulta = await Bookings.get(url);   
         
         if(consulta.status === 200){
 
@@ -32,7 +32,7 @@ export const ListBookings = () => {
 
     return(
         <>
-            <Form onFinish={onFinish}  layout="inline">
+            <Form onFinish={onFinish}  layout="inline"  size='small'>
 
                 <Form.Item
                      label="Flight Date "

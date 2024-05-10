@@ -1,9 +1,10 @@
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { Button, Popconfirm } from 'antd';
+import { Button, Popconfirm, Form, Input } from 'antd';
 import { QuestionCircleOutlined } from '@ant-design/icons';
 import queryString from 'query-string';
 import { CancelBooking } from '../../api/Bookings';
+import { ReservaContext } from './context/reservaContext';
 
 
 export const Booking = () => {
@@ -11,9 +12,9 @@ export const Booking = () => {
     const location = useLocation();
     const navigate = useNavigate();
     const { r = ''} = queryString.parse( location.search);
-
+    
     useEffect( () => {
-
+        
         if(!r){
             navigate('/formulario');
             return
@@ -21,7 +22,19 @@ export const Booking = () => {
     }, []);
     
     const bookingObj = JSON.parse(r);    
-    const { businessId } = bookingObj;
+    const { businessId, agent, destination, airWaybillIdentifier, origin, product, shipper, 
+        totalPieces, totalVolume, totalWeight, route } = bookingObj;
+        
+    const [ reserva_init, setReserva_init ] = useContext(ReservaContext);
+    
+
+    const onFinish = (values) => {
+        console.log('Success:', values);
+    };
+
+    const onFinishFailed = (errorInfo) => {
+        console.log('Failed:', errorInfo);
+    };
       
     const CancelarBooking = async (id) => {
 
@@ -42,6 +55,174 @@ export const Booking = () => {
     return(
         <>
             <h1>Booking </h1>
+
+            <Form
+                name="basic"               
+                layout='inline'
+                size='small'
+                labelCol={{
+                span: 8,
+                }}
+                wrapperCol={{
+                span: 16,
+                }}
+                style={{
+                    maxWidth: 1000,
+                }}
+                initialValues={{
+                remember: true,
+                }}
+                onFinish={onFinish}
+                onFinishFailed={onFinishFailed}
+                autoComplete="off"
+            >
+
+            <Form.Item
+                label="Awb"
+                name="airlinePrefix"
+                style={{ marginBottom: '1rem'}}
+                wrapperCol={{
+                    span: 6,
+                }}
+            >
+                <Input 
+                    defaultValue={airWaybillIdentifier.airlinePrefix}
+                    disabled
+                />
+
+            </Form.Item>
+
+            <Form.Item
+                label="Number"
+                name="serial"
+                style={{ marginBottom: '1rem'}}
+                wrapperCol={{
+                    span: 9,
+                }}
+                rules={[
+                    {
+                    required: true,
+                    message: 'Please input serial',
+                    },
+                ]}
+                >
+                <Input
+                    type='text'
+                    defaultValue={airWaybillIdentifier.serial}
+                />
+            </Form.Item>
+
+            <Form.Item
+                label="Agent"
+                name="agent"
+                style={{ marginBottom: '1rem'}}
+                rules={[
+                    {
+                    required: true,
+                    message: 'Please input agent',
+                    },
+                ]}
+                >
+                <Input type='text' defaultValue={agent.name} />
+            </Form.Item>
+
+            <Form.Item
+                label="Phone"
+                name="contact"
+                style={{ marginBottom: '1rem'}}
+                wrapperCol={{
+                    span: 11,
+                }}               
+            >
+                <Input type='text' defaultValue={agent.contact?.phone} />
+            </Form.Item>
+
+            <Form.Item
+                label="Shipper"
+                name="shipper"
+                wrapperCol={{
+                    span: 10,
+                }} 
+                style={{ marginBottom: '1rem'}}
+                
+                >
+                <Input type='text' defaultValue={shipper.name} />
+            </Form.Item>
+
+            <Form.Item
+                label="Origin"
+                name="origin"
+                style={{ marginBottom: '1rem'}}
+                wrapperCol={{
+                    span: 6,
+                }}               
+            >
+                <Input type='text' defaultValue={origin.code} />
+            </Form.Item>
+
+            <Form.Item
+                label="Dest"
+                name="destination"
+                style={{ marginBottom: '1rem'}}
+                wrapperCol={{
+                    span: 6,
+                }}               
+            >
+                <Input type='text' defaultValue={destination.code} />
+            </Form.Item>
+
+            <Form.Item
+                label="OfGoods"
+                name="code"
+                style={{ marginBottom: '1rem'}}
+                wrapperCol={{
+                    span: 10,
+                }}               
+            >
+                <Input type='text' defaultValue={product.code} />
+            </Form.Item>
+
+            <Form.Item
+                label="Pieces"
+                name="totalPieces"
+                style={{ marginBottom: '1rem'}}
+                wrapperCol={{
+                    span: 6,
+                }}               
+            >
+                <Input type='number' defaultValue={totalPieces} />
+            </Form.Item>
+
+            <Form.Item
+                label="Vol"
+                name="totalVolume"
+                style={{ marginBottom: '1rem'}}
+                wrapperCol={{
+                    span: 8,
+                }}               
+            >
+                <Input type='number' defaultValue={totalVolume.amount} />
+            </Form.Item>
+
+            <Form.Item
+                label="Weight"
+                name="totalWeight"
+                style={{ marginBottom: '1rem'}}
+                wrapperCol={{
+                    span: 6,
+                }}               
+            >
+                <Input type='number' defaultValue={totalWeight.amount} />
+            </Form.Item>
+
+           {/*  Mostrar los vuelos de la reserva */}
+
+           <Button type="primary" htmlType="submit">
+             Save
+          </Button>
+            
+            </Form>
+
             <Popconfirm
                 title="Delete the booking"
                 description="Are you sure to delete this booking?"
@@ -56,9 +237,9 @@ export const Booking = () => {
             >
              <Button 
                 danger
-                style={{marginLeft: '40px'}}
+                style={{marginLeft: '80%'}}
             >
-                Cancel
+                Cancel Booking
             </Button>
 
             </Popconfirm>

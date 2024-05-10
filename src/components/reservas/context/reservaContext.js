@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 export const ReservaContext = React.createContext([{}, () => {}]);
 
-export const ReservaProvider = props => {
+export const ReservaProvider = props => { 
 
     const [reserva_init, setReserva_init] = useState({
         agentAccountNumber: '',

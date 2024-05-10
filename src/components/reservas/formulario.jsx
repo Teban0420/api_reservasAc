@@ -71,10 +71,10 @@ export const Formulario = () => {
         <>
          <div >
 
-          <Form                 
-                className='formulario__reservas'
+          <Form                   
                 name="horizontal_login" 
-                layout="inline"                
+                layout="inline"  
+                size='small'              
                 onFinish={onFinish}                
                 wrapperCol={{ span: 15 }}
             >
@@ -82,7 +82,7 @@ export const Formulario = () => {
                 <Form.Item  
                     label="Prefix"                  
                     name="airlinePrefix"   
-                    style={{width: '15%'}}
+                    style={{width: '15%', marginBottom: '1rem'}}
                     wrapperCol={{
                         span: 10,
                     }}            
@@ -98,7 +98,7 @@ export const Formulario = () => {
                 <Form.Item  
                     label="Number" 
                     name="serial" 
-                    style={{ width: '20%' }}                    
+                    style={{ width: '20%', marginBottom: '1rem' }}                    
                     wrapperCol={{
                         span: 12,
                     }} 
@@ -121,7 +121,7 @@ export const Formulario = () => {
                 <Form.Item 
                     label="Origin"
                     name="originAirportCode"
-                    style={{ width: '15%' }}    
+                    style={{ width: '15%', marginBottom: '1rem' }}    
                     rules={[
                         {
                             required: true,
@@ -142,7 +142,7 @@ export const Formulario = () => {
                 <Form.Item 
                     label="Dest"
                     name="destinationAirportCode"
-                    style={{ width: '15%' }}
+                    style={{ width: '15%', marginBottom: '1rem' }}
                     rules={[
                         {
                             required: true,
@@ -163,7 +163,7 @@ export const Formulario = () => {
                 <Form.Item
                     label='Weight (LB)'
                     name='weight' 
-                    style={{ width: '22%' }}   
+                    style={{ width: '22%', marginBottom: '1rem' }}   
                     wrapperCol={{
                         span: 10,
                     }}                                 
@@ -191,7 +191,7 @@ export const Formulario = () => {
                 <Form.Item
                     label="Dep"
                     name="Date"   
-                    style={{ width: '22%' }}   
+                    style={{ width: '22%', marginBottom: '1rem' }}   
                     wrapperCol={{
                         span: 13,
                     }}               
@@ -207,7 +207,7 @@ export const Formulario = () => {
                 <Form.Item
                     label="Arr"
                     name="arrivalOn"   
-                    style={{ width: '22%' }}   
+                    style={{ width: '22%', marginBottom: '1rem' }}   
                     wrapperCol={{
                         span: 13,
                     }}               
@@ -223,7 +223,7 @@ export const Formulario = () => {
                 <Form.Item
                     label="OfGoods"
                     name="natureOfGoods" 
-                    style={{ width: '20%' }}
+                    style={{ width: '20%', marginBottom: '1rem' }}
                     wrapperCol={{
                         span: 10,
                     }} 
@@ -247,7 +247,7 @@ export const Formulario = () => {
                 <Form.Item
                     label="pieces"
                     name="pieces"  
-                    style={{ width: '15%' }}                      
+                    style={{ width: '15%', marginBottom: '1rem' }}                      
                     rules={[
                         {
                             required: true,
@@ -285,7 +285,7 @@ export const Formulario = () => {
             <Divider />
            
                 {
-                    // (listado.length > 0) ? <Ejemplo listado={listado} />  : ''            
+                         
                     (listado.length > 0) ? 
 
                         <Ejemplo 
