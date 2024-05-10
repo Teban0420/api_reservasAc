@@ -20,14 +20,14 @@ export const Booking = () => {
         }
     }, []);
     
-    const bookingObj = JSON.parse(r); 
+    const bookingObj = JSON.parse(r);    
     const { businessId } = bookingObj;
       
     const CancelarBooking = async (id) => {
 
         try {
             
-            const peticion = await CancelBooking.post(`v2/bookings/${id}/cancellation-requests`);
+            const peticion = await CancelBooking.post(`v2/bookings/${id}/cancellation-requests`);           
     
             if(peticion.status === 204){
                 navigate('/formulario');

@@ -7,8 +7,9 @@ export const ReservaProvider = props => {
     const [reserva_init, setReserva_init] = useState({
         agentAccountNumber: '',
         airWaybill: {
-            prefix: "279",
-            referenceType: 'AIR WAYBILL'
+            prefix: '279',
+            referenceType: 'AIR WAYBILL',
+            serial: ''
         },
         destinationAirportCode: '',
         natureOfGoods: '',

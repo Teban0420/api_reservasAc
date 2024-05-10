@@ -8,7 +8,7 @@ import { Booking } from './Booking';
 
 export const MostrarBookings = ({bookings}) => {
 
-    const [lista, setLista] = useState(bookings);
+    const [lista, setLista] = useState(bookings);   
     const navigate = useNavigate();
     
     const verBooking = (reserva) => {        

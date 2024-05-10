@@ -19,8 +19,8 @@ export const ListBookings = () => {
     
     const consultar = async (url) => {
         
-        const consulta = await Bookings.get(url);   
-  
+        const consulta = await Bookings.get(url);        
+        
         if(consulta.status === 200){
 
             setBookings(consulta.data._embedded.bookings);                              
@@ -36,8 +36,7 @@ export const ListBookings = () => {
 
                 <Form.Item
                      label="Flight Date "
-                     name="flightDate"
-                                                         
+                     name="flightDate"                                                         
                 >
                     
                     <input type="date"  />
