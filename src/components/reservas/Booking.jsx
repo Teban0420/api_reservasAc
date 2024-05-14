@@ -1,11 +1,14 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Button, Popconfirm, Form, Input } from 'antd';
+import { Typography } from 'antd';
 import { QuestionCircleOutlined } from '@ant-design/icons';
 import queryString from 'query-string';
 import { CancelBooking } from '../../api/Bookings';
 import { ReservaContext } from './context/reservaContext';
+import { TablaVuelosReserva } from './TablaVuelosReserva';
 
+const { Title } = Typography;
 
 export const Booking = () => {
 
@@ -54,14 +57,16 @@ export const Booking = () => {
 
     return(
         <>
-            <h1>Booking </h1>
+            <Title>Booking</Title>
+
+            <br />
 
             <Form
                 name="basic"               
                 layout='inline'
                 size='small'
                 labelCol={{
-                span: 8,
+                span: 7,
                 }}
                 wrapperCol={{
                 span: 16,
@@ -86,7 +91,7 @@ export const Booking = () => {
                 }}
             >
                 <Input 
-                    defaultValue={airWaybillIdentifier.airlinePrefix}
+                    defaultValue={airWaybillIdentifier?.airlinePrefix}
                     disabled
                 />
 
@@ -108,7 +113,7 @@ export const Booking = () => {
                 >
                 <Input
                     type='text'
-                    defaultValue={airWaybillIdentifier.serial}
+                    defaultValue={airWaybillIdentifier?.serial}
                 />
             </Form.Item>
 
@@ -123,7 +128,7 @@ export const Booking = () => {
                     },
                 ]}
                 >
-                <Input type='text' defaultValue={agent.name} />
+                <Input type='text' defaultValue={agent?.name} />
             </Form.Item>
 
             <Form.Item
@@ -134,7 +139,7 @@ export const Booking = () => {
                     span: 11,
                 }}               
             >
-                <Input type='text' defaultValue={agent.contact?.phone} />
+                <Input type='text' defaultValue={agent?.contact.phone} />
             </Form.Item>
 
             <Form.Item
@@ -146,7 +151,7 @@ export const Booking = () => {
                 style={{ marginBottom: '1rem'}}
                 
                 >
-                <Input type='text' defaultValue={shipper.name} />
+                <Input type='text' defaultValue={shipper?.name} />
             </Form.Item>
 
             <Form.Item
@@ -157,7 +162,7 @@ export const Booking = () => {
                     span: 6,
                 }}               
             >
-                <Input type='text' defaultValue={origin.code} />
+                <Input type='text' defaultValue={origin?.code} />
             </Form.Item>
 
             <Form.Item
@@ -168,7 +173,7 @@ export const Booking = () => {
                     span: 6,
                 }}               
             >
-                <Input type='text' defaultValue={destination.code} />
+                <Input type='text' defaultValue={destination?.code} />
             </Form.Item>
 
             <Form.Item
@@ -179,7 +184,7 @@ export const Booking = () => {
                     span: 10,
                 }}               
             >
-                <Input type='text' defaultValue={product.code} />
+                <Input type='text' defaultValue={product?.code} />
             </Form.Item>
 
             <Form.Item
@@ -201,7 +206,7 @@ export const Booking = () => {
                     span: 8,
                 }}               
             >
-                <Input type='number' defaultValue={totalVolume.amount} />
+                <Input type='number' defaultValue={totalVolume?.amount} />
             </Form.Item>
 
             <Form.Item
@@ -212,16 +217,20 @@ export const Booking = () => {
                     span: 6,
                 }}               
             >
-                <Input type='number' defaultValue={totalWeight.amount} />
+                <Input type='number' defaultValue={totalWeight?.amount} />
             </Form.Item>
 
-           {/*  Mostrar los vuelos de la reserva */}
 
-           <Button type="primary" htmlType="submit">
+           <Button type="primary" htmlType="submit" size="middle">
              Save
           </Button>
             
-            </Form>
+        </Form>
+
+           {/*  Mostrar los vuelos de la reserva */}
+        <br />
+
+           <TablaVuelosReserva route={route} />
 
             <Popconfirm
                 title="Delete the booking"

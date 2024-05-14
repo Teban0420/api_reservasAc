@@ -3,7 +3,7 @@ import { Table } from 'antd';
 const columns = [
   {
     title: 'UTC Time',
-    dataIndex: 'UTC_Time',    
+    dataIndex: 'UTC_Time',     
   },
   {
     title: 'Event',
