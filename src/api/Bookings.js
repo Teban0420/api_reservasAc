@@ -8,7 +8,7 @@ export const Bookings = axios.create({
     } 
 }); 
 
-export const CancelBooking = axios.create({
+export const Update_Cancel_Booking = axios.create({
     baseURL: 'https://api-gateway.champ.aero/booking',
     headers: {
         apikey: 'EnbX12j02DDHFrAoqjaq3FIkmTGncrrk',

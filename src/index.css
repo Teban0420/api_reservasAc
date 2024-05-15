@@ -33,3 +33,6 @@
 .icono {
     font-size: 16px;
 }
+.oculto {
+    display: none;
+}

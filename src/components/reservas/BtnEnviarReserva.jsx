@@ -5,7 +5,7 @@ import { Bookings } from '../../api/Bookings';
 import { ReservaContext } from './context/reservaContext';
 
 
-export const BtnEnviarReserva = () => { 
+export const BtnEnviarReserva = ( actualizar = false) => { 
     
     const [reserva_init, setReserva_init] = useContext(ReservaContext); 
     const [isModalOpen, setIsModalOpen] = useState(false);

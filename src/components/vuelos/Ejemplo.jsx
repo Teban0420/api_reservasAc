@@ -3,7 +3,7 @@ import {List } from 'antd';
 import { formatoVuelos } from './helpers/formatoVuelos';
 
 
-export const Ejemplo = ({listado, reserva, btnEnviarReserva, setBtnEnviarReserva}) => {
+export const Ejemplo = ({listado, reserva, btnEnviarReserva = false, setBtnEnviarReserva = null}) => {
 
   // const vuelos = useMemo( () => formatoVuelos(listado, reserva), [listado]);  
   const vuelos = useMemo( () => formatoVuelos(listado, reserva, btnEnviarReserva, setBtnEnviarReserva));  
