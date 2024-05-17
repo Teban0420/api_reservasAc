@@ -8,8 +8,10 @@ export const ApiProvider = props => {
     // estado inicial
     const [auth, guardarAuth ] = useState({
         token: '',
-        auth: false
-    })
+        auth: false,
+        agents: null,
+        usr: '',
+    });
      
     return (
         <ApiContext.Provider value={[auth, guardarAuth]} >

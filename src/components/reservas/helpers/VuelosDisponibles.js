@@ -12,6 +12,7 @@ export const AvailabilityObj = async ( objeto = {}) =>{
     try {
 
         const respuesta = await Availability.get(url);  
+
         return respuesta.data.routes;   
         
     } catch (error) {

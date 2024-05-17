@@ -1,9 +1,10 @@
 import { useContext } from 'react'
+import { useNavigate, Link  } from 'react-router-dom';
 import { Button,  Form, Input, Typography } from 'antd';
 import { ApiContext } from '../../context/ApiContext';
-import { useNavigate, Link  } from 'react-router-dom';
-const { Title} = Typography
+import { ApiLogin } from '../../api/login';
 
+const { Title} = Typography
 
 export const Login = () => {
 
@@ -11,23 +12,33 @@ export const Login = () => {
 
   const navigate = useNavigate();  
 
-  const onFinish = ({username, password}) => {
+  const onFinish = async ({username, password}) => {
 
     // hacer peticion fecth para login
 
-    // try {
-      
-    // } catch (error) {
-      
-    // }
-    
-    localStorage.setItem('token', 'ABUKSIU35698751236')
-    guardarAuth({
-        token: 'ABUKSIU35698751236',
-        auth: true
-    });
+    try {
 
-    navigate('/formulario')
+      const respuesta = await ApiLogin.get(`Authenticate/login?username=${username}&password=${password}`);
+      const { sessionId, agents, usr } = respuesta.data;
+
+      localStorage.setItem('token', sessionId);
+
+      guardarAuth({
+          token: sessionId,
+          auth: true,
+          agents,
+          usr,
+      });
+      
+
+     navigate('/formulario');
+
+      
+    } catch (error) {
+      
+      
+    }  
+    
     
   };
   
