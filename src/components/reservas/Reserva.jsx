@@ -20,7 +20,7 @@ export const Reserva = () => {
 
         try {
 
-            const respuesta = await TrackAndTrace.get(url);
+            const respuesta = await TrackAndTrace.get(url); 
             setBooking(respuesta.data);            
             
         } catch (error) {

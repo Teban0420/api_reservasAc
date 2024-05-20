@@ -59,7 +59,7 @@ export const Formulario = () => {
 
         try {          
             const respuesta = await Availability.get(url);  
-            setlistado(respuesta.data.routes);                  
+            setlistado(respuesta.data.routes);                                  
 
         } catch (error) {
             console.log(error)            

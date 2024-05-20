@@ -1,62 +1,82 @@
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import { useNavigate, Link  } from 'react-router-dom';
-import { Button,  Form, Input, Typography } from 'antd';
+import { Button,  Form, Input, Typography, message} from 'antd';
 import { ApiContext } from '../../context/ApiContext';
 import { ApiLogin } from '../../api/login';
+import { MsgError } from '../ui/MsgError';
+import { Spinner } from '../ui/Spinner';
+
 
 const { Title} = Typography
 
 export const Login = () => {
 
-  const [ auth, guardarAuth ] = useContext(ApiContext)
+  const [ auth, guardarAuth ] = useContext(ApiContext);
+  const [showError, setShowError] = useState(false);
 
+  const [btnEnviar, setBtnEnviar] = useState(false);
   const navigate = useNavigate();  
+  const [messageApi, contextHolder] = message.useMessage();
 
-  const onFinish = async ({username, password}) => {
-
-    // hacer peticion fecth para login
-
-    try {
-
-      const respuesta = await ApiLogin.get(`Authenticate/login?username=${username}&password=${password}`);
-      const { sessionId, agents, usr } = respuesta.data;
-
-      localStorage.setItem('token', sessionId);
-
-      guardarAuth({
-          token: sessionId,
-          auth: true,
-          agents,
-          usr,
-      });
-      
-
-     navigate('/formulario');
-
-      
-    } catch (error) {
-      
-      
-    }  
+  const onFinish = async ({user, password}) => {
     
+    try {
+      
+      setBtnEnviar(true);
+      
+      const respuesta = await ApiLogin.post('Authenticate/login', {
+        username: user,
+        password
+      });
+
+      const { sessionid, agents, username } = respuesta.data;
+
+      localStorage.setItem('token', sessionid);
+      
+      guardarAuth({
+            token: sessionid,
+            auth: true,
+            agents,
+            username,
+      });      
+        
+      navigate('/formulario');
+      
+    } catch (error) {     
+
+      setShowError(true); 
+      msgError();    
+      
+    }     
     
   };
   
-  const onFinishFailed = (errorInfo) => {
-    console.log('Failed:', errorInfo);
-  };
-
-  const volver = () => {
-      navigate('/');
+  const msgError = () => {
+      messageApi.open({
+        type: 'error',
+        content: 'Something Wrong'
+    });
   }
 
     return(
       <>
-      <div className="container"> 
-        <div className='formulario'>                
+    
+      <div className="container-sm text-center "> 
 
-        <Title level={2} >Login</Title> 
+        <div className='login'>  
+                   
+        <div className='logo'>
+          <img  width='250' height='70' src={require('../ui/img/logo.png')} alt="Logo" />
+        </div>
+
+        {
+          (showError) && <MsgError msg={contextHolder}  />                     
+        }
+
+        {/* <Title level={2} style={{color: 'white'}}>Login</Title>  */}
           
+         <br />
+         <br />
           <Form
               name="basic"
               labelCol={{
@@ -66,20 +86,19 @@ export const Login = () => {
                 span: 8,
               }}
               onFinish={onFinish}
-              onFinishFailed={onFinishFailed}
               autoComplete="off"
           >
-          <Form.Item
+          <Form.Item          
               label="Username"
-              name="username"
+              name="user"               
               rules={[
                 {
                   required: true,
-                  message: 'Please input your username!',
+                  message: 'Input username',
                 },
               ]}
           >
-        <Input />
+            <Input />
         </Form.Item>
 
         <Form.Item
@@ -88,7 +107,7 @@ export const Login = () => {
             rules={[
               {
                 required: true,
-                message: 'Please input your password!',
+                message: 'Input password',
               },
             ]}
         >
@@ -102,18 +121,13 @@ export const Login = () => {
           }}
       >
 
-      <Link 
-         className='link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover p-3'
-         to="/"
-      >
-         Home
-      </Link>      
-
         <Button 
           type="primary" 
           htmlType="submit"
+          style={{backgroundColor: 'white', marginTop: '1rem', color: '#2843A0'}}
+          disabled={btnEnviar}
         >
-          Submit
+          Send
         </Button>
 
 

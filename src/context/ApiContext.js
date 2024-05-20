@@ -10,7 +10,7 @@ export const ApiProvider = props => {
         token: '',
         auth: false,
         agents: null,
-        usr: '',
+        username: '',
     });
      
     return (

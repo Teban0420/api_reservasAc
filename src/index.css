@@ -1,6 +1,6 @@
 
 .formulario {
-    margin-top: 10rem;    
+    margin: 10rem 5rem;    
     text-align: center;
 }
 .formulario h2 {
@@ -14,10 +14,17 @@
     justify-content: space-between;
 } */
 
+.header{
+    padding-left: 1.5rem;
+    font-size: 30;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
 .carrusel{
     margin-top: 3px;
     width: 100%;
-}
+} 
 .tab {
     margin-left: 20px;
     width: 100%;
@@ -36,3 +43,32 @@
 .oculto {
     display: none;
 }
+.login {    
+    width: 100%;    
+    margin-top: 10rem;
+    margin: 10rem auto 0 auto;
+    padding: 1rem;
+    /* background-color: rgb(244, 244, 244); */
+    background-color: #2843A0;
+    border-style: solid;
+    border-radius: 1.5rem;
+    border-width: 0.5px;
+    border-color: white;
+}
+@media(min-width: 768px) { 
+    .login {
+        width: 50%;
+        height: 25rem;
+        margin: 15%  auto 0 auto;
+    }
+}
+.contenedor { 
+    max-width: 140rem;
+    margin: 0 auto;
+    width: 95%;
+}
+.logo {
+    margin-bottom: 1.5rem;
+    background-color: #2843A0;
+}
+
