@@ -114,10 +114,7 @@ export const BtnSelect = ({segment, reserva, btnEnviarReserva, setBtnEnviarReser
                 }
                 
                  <RightSquareTwoTone 
-                    className='icono' 
-                    style={{
-                        marginLeft: 900,                                              
-                    }}  
+                    className='icono'                      
                     onClick={showPopconfirm} 
                 />
            

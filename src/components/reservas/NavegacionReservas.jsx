@@ -23,7 +23,10 @@ export const NavegacionReservas = () => {
   } = theme.useToken();
 
   const toggleCollapsed = () => {
+
+    if(window.innerWidth > 768 && !collapsed)  return;
     setCollapsed(!collapsed);
+
   };
 
 
@@ -44,7 +47,7 @@ export const NavegacionReservas = () => {
 
         <img 
           height='10%' 
-          width='100%' 
+          width='90%' 
           style={{marginTop: '1rem', marginBottom: '1rem'}} 
           src={require('../ui/img/logo.png')} 
           alt="Logo" 
@@ -57,7 +60,7 @@ export const NavegacionReservas = () => {
             defaultSelectedKeys={['1']}
             items={[
               {
-                label: <Link to="/formulario" onClick={ toggleCollapsed }>Home</Link>,
+                label: <Link to="/formulario" onClick={toggleCollapsed}>Home</Link>,
                 key: '1',
                 icon: <HomeOutlined  />,
               },

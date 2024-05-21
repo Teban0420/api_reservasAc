@@ -76,15 +76,20 @@ export const Formulario = () => {
                 layout="inline"  
                 size='small'              
                 onFinish={onFinish}                
-                wrapperCol={{ span: 15 }}
+                labelCol={{
+                    span: 8,
+                    }}                    
+                    style={{
+                        maxWidth: 1100,
+                    }}
             >
 
                 <Form.Item  
                     label="Prefix"                  
                     name="airlinePrefix"   
-                    style={{width: '15%', marginBottom: '1rem'}}
+                    style={{ marginBottom: '1rem'}}
                     wrapperCol={{
-                        span: 10,
+                        span: 6,
                     }}            
                 >
                     <Input 
@@ -98,7 +103,7 @@ export const Formulario = () => {
                 <Form.Item  
                     label="Number" 
                     name="serial" 
-                    style={{ width: '20%', marginBottom: '1rem' }}                    
+                    style={{ marginBottom: '1rem' }}                    
                     wrapperCol={{
                         span: 12,
                     }} 
@@ -121,7 +126,10 @@ export const Formulario = () => {
                 <Form.Item 
                     label="Origin"
                     name="originAirportCode"
-                    style={{ width: '15%', marginBottom: '1rem' }}    
+                    wrapperCol={{
+                        span: 8,
+                    }}  
+                    style={{ marginBottom: '1rem' }}    
                     rules={[
                         {
                             required: true,
@@ -142,7 +150,10 @@ export const Formulario = () => {
                 <Form.Item 
                     label="Dest"
                     name="destinationAirportCode"
-                    style={{ width: '15%', marginBottom: '1rem' }}
+                    wrapperCol={{
+                        span: 8,
+                    }}  
+                    style={{ marginBottom: '1rem' }}
                     rules={[
                         {
                             required: true,
@@ -161,11 +172,11 @@ export const Formulario = () => {
                 </Form.Item>
 
                 <Form.Item
-                    label='Weight (LB)'
+                    label='Weight'
                     name='weight' 
-                    style={{ width: '22%', marginBottom: '1rem' }}   
+                    style={{ marginBottom: '1rem' }}   
                     wrapperCol={{
-                        span: 10,
+                        span: 8,
                     }}                                 
                     rules={[
                         {
@@ -183,7 +194,7 @@ export const Formulario = () => {
 
                 <Input 
                     type='text'                     
-                    placeholder='Weight (LB)*'                       
+                    placeholder='LB*'                       
                 />
 
                 </Form.Item>
@@ -191,7 +202,7 @@ export const Formulario = () => {
                 <Form.Item
                     label="Dep"
                     name="Date"   
-                    style={{ width: '22%', marginBottom: '1rem' }}   
+                    style={{ marginBottom: '1rem' }}   
                     wrapperCol={{
                         span: 13,
                     }}               
@@ -207,7 +218,7 @@ export const Formulario = () => {
                 <Form.Item
                     label="Arr"
                     name="arrivalOn"   
-                    style={{ width: '22%', marginBottom: '1rem' }}   
+                    style={{marginBottom: '1rem' }}   
                     wrapperCol={{
                         span: 13,
                     }}               
@@ -223,9 +234,9 @@ export const Formulario = () => {
                 <Form.Item
                     label="OfGoods"
                     name="natureOfGoods" 
-                    style={{ width: '20%', marginBottom: '1rem' }}
+                    style={{ marginBottom: '1rem' }}
                     wrapperCol={{
-                        span: 10,
+                        span: 8,
                     }} 
                     rules={[
                         {
@@ -246,8 +257,11 @@ export const Formulario = () => {
 
                 <Form.Item
                     label="pieces"
-                    name="pieces"  
-                    style={{ width: '15%', marginBottom: '1rem' }}                      
+                    name="pieces" 
+                    wrapperCol={{
+                        span: 8,
+                    }}  
+                    style={{ marginBottom: '1rem' }}                      
                     rules={[
                         {
                             required: true,
