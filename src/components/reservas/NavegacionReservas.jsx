@@ -43,17 +43,17 @@ export const NavegacionReservas = () => {
 
         <div className="demo-logo-vertical" />
 
-        <img 
-          height='7%' 
-          width='90%' 
-          style={{marginTop: '1rem', marginBottom: '1rem'}} 
-          src={require('../ui/img/logo.png')} 
-          alt="Logo" 
-        />
-
+          <img 
+            height='50rem' 
+            width='100%' 
+            style={{marginTop: '1rem', marginBottom: '1rem'}} 
+            src={require('../ui/img/logo.png')} 
+            alt="Logo" 
+          />
+      
           <Menu
             theme="dark"
-            style={{backgroundColor: '#2843A0', fontSize: '17px'}}
+            style={{backgroundColor: '#2843A0', fontSize: '17px', fontWeight: 'bold'}}
             mode="vertical"
             defaultSelectedKeys={['1']}
             items={[

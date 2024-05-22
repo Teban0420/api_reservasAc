@@ -10,11 +10,7 @@ const columns = [
     dataIndex: 'Event',
   },
   {
-    title: 'Pieces',
-    dataIndex: 'Pieces',
-  },
-  {
-    title: 'Weight',
+    title: 'Pcs/Wt',
     dataIndex: 'Weight',
   },
   {
@@ -35,20 +31,25 @@ export const TablaEvents = (eventos = []) => {
             key: i,
             UTC_Time: event.time,
             Event: `${event.onload.code}-${event.offload.code} ${event.actionStatus.description}`,
-            Pieces: event.pieces,
-            Weight: `${event.weight.amount}${event.weight.unit}`,
+            Weight: `${event.pieces}/${event.weight.amount}${event.weight.unit}`,
             Details: event.transportMeans.reference
         });
     });
 
     return(
-        <Table            
+        <Table                   
             columns={columns}
             dataSource={data}  
-            pagination={false}   
+            pagination={false}  
+            style={{
+              borderSpacing: 0,
+              maxWidth: 1000
+            }} 
             scroll={{
                 y: 240,
+                x: true
             }}
+  
         />
     )
 

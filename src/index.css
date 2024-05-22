@@ -83,10 +83,11 @@
     padding-top: 1rem;
 }
 @media (min-width: 768px){
-    .btn{
+    .btn{ 
         padding-top: 0; 
     }
 }
+
 
 
 

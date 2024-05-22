@@ -88,7 +88,8 @@ export const Reserva = () => {
 
                 <Col xs={24} sm={12} md={8} lg={6} xl={10}>
 
-                    <Form.Item    
+                    <Form.Item  
+                        label='Number'  
                         name="serialNumber" 
                         wrapperCol={{
                             span: 16,
