@@ -15,7 +15,9 @@ export const Login = () => {
   const [showError, setShowError] = useState(false);
 
   const [btnEnviar, setBtnEnviar] = useState(false);
-  const navigate = useNavigate();  
+  const [showSpinner, setShowSpinner] = useState(false);
+
+  const navigate = useNavigate(); 
   const [messageApi, contextHolder] = message.useMessage();
 
   const onFinish = async ({user, password}) => {
@@ -23,6 +25,7 @@ export const Login = () => {
     try {
       
       setBtnEnviar(true);
+      setShowSpinner(true);
       
       const respuesta = await ApiLogin.post('Authenticate/login', {
         username: user,
@@ -38,7 +41,9 @@ export const Login = () => {
             auth: true,
             agents,
             username,
-      });      
+      }); 
+      
+      setShowSpinner(false);
         
       navigate('/formulario');
       
@@ -58,84 +63,85 @@ export const Login = () => {
     });
   }
 
+  if(showSpinner){
+    return <Spinner />
+  }
+
     return(
-      <>
-    
-      <div className="container-sm text-center "> 
+      <>         
+          <div className="container-sm text-center "> 
 
-        <div className='login'>  
-                   
-        <div className='logo'>
-          <img  width='250' height='70' src={require('../ui/img/logo.png')} alt="Logo" />
-        </div>
+              <div className='login'>  
+                      
+                <div className='logo'>
+                  <img  width='250' height='70' src={require('../ui/img/logo.png')} alt="Logo" />
+                </div>
 
-        {
-          (showError) && <MsgError msg={contextHolder}  />                     
-        }
-
-        {/* <Title level={2} style={{color: 'white'}}>Login</Title>  */}
-          
-         <br />
-         <br />
-          <Form
-              name="basic"
-              labelCol={{
-                span: 8,
-              }}
-              wrapperCol={{
-                span: 8,
-              }}
-              onFinish={onFinish}
-              autoComplete="off"
-          >
-          <Form.Item          
-              label="Username"
-              name="user"               
-              rules={[
                 {
-                  required: true,
-                  message: 'Input username',
-                },
-              ]}
-          >
-            <Input />
-        </Form.Item>
+                  (showError) && <MsgError msg={contextHolder}  />                     
+                }
 
-        <Form.Item
-            label="Password"
-            name="password"
-            rules={[
-              {
-                required: true,
-                message: 'Input password',
-              },
-            ]}
-        >
-      <Input.Password />
-      </Form.Item>
+                {/* <Title level={2} style={{color: 'white'}}>Login</Title>  */}
+              
+                <br />
+                <br />
+                <Form
+                    name="basic"
+                    labelCol={{
+                      span: 8,
+                    }}
+                    wrapperCol={{
+                      span: 8,
+                    }}
+                    onFinish={onFinish}
+                    autoComplete="off"
+                >
+                  <Form.Item          
+                      label="Username"
+                      name="user"               
+                      rules={[
+                        {
+                          required: true,
+                          message: 'Input username',
+                        },
+                      ]}
+                  >
+                  <Input />
+                 </Form.Item>
 
-      <Form.Item
-          wrapperCol={{
-            offset: 8,
-            span: 16,
-          }}
-      >
+                <Form.Item
+                    label="Password"
+                    name="password"
+                    rules={[
+                      {
+                        required: true,
+                        message: 'Input password',
+                      },
+                    ]}
+                >
+                  <Input.Password />
+                </Form.Item>
 
-        <Button 
-          type="primary" 
-          htmlType="submit"
-          style={{backgroundColor: 'white', marginTop: '1rem', color: '#2843A0'}}
-          disabled={btnEnviar}
-        >
-          Send
-        </Button>
+                <Form.Item
+                    wrapperCol={{
+                      offset: 8,
+                      span: 16,
+                    }}
+                >
+                  <Button 
+                    type="primary" 
+                    htmlType="submit"
+                    style={{backgroundColor: 'white', marginTop: '1rem', color: '#2843A0'}}
+                    disabled={btnEnviar}
+                  >
+                    Send
+                  </Button>
 
+                 </Form.Item>
+              </Form> 
 
-      </Form.Item>
-    </Form> 
-
-      </div>
-    </div> 
+          </div>
+        </div> 
       </>
     )
 }

@@ -9,10 +9,18 @@
 }
 
 .header{
-    padding-left: 1.5rem;
-    font-size: 30;
+    display: inline;
+    padding-left: 70%;
+    font-size: 20;
     font-weight: bold;
     text-transform: uppercase;
+}
+@media (min-width: 768px){ 
+    .header{
+        display: inline;
+        padding-left: 1.5rem;
+        font-size: 30;
+    }
 }
 .carrusel{
     margin-top: 3px;
@@ -79,6 +87,7 @@
         padding-top: 0; 
     }
 }
+
 
 
 

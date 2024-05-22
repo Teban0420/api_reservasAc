@@ -39,9 +39,11 @@ export const Booking = () => {
         totalPieces, totalVolume, totalWeight, route } = bookingObj;     
     
 
-    const onFinish = async (values) => {
+    const onFinish = async (values) => { 
+
+        const { destination, origin, totalWeight } = values;
         
-        const consultarDisponibilidad = await AvailabilityObj(values);
+        const consultarDisponibilidad = await AvailabilityObj(destination, origin, totalWeight);
         setListado(consultarDisponibilidad);    
         
         setReserva_init({
@@ -345,7 +347,7 @@ export const Booking = () => {
                             style={{backgroundColor: '#5cb85c', color: 'white'}}                            
                             onClick={actualizarBooking}                                      
                         >
-                            Enviar
+                            Send
                         </Button>
 
                     </>

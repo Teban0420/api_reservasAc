@@ -5,6 +5,8 @@ import { Ejemplo } from '../vuelos/Ejemplo';
 import { BtnEnviarReserva } from './BtnEnviarReserva';
 import { ReservaContext } from './context/reservaContext';
 import { getCurrentDate } from './helpers/fechaActual';
+import { AvailabilityObj } from './helpers/VuelosDisponibles';
+import { Spinner } from '../ui/Spinner';
 
 
 let reserva = {};
@@ -13,24 +15,19 @@ export const Formulario = () => {
 
     const [ listado, setlistado ] = useState([]); 
     const [ btnEnviarReserva, setBtnEnviarReserva ] = useState(false); 
+    const [ showSpinner, setShowSpinner ] = useState(false); 
 
-    const [reserva_init, setReserva_init] = useContext(ReservaContext);  
-    
+    const [reserva_init, setReserva_init] = useContext(ReservaContext);      
        
     // funcion para activar el formulario
-    const onFinish = ({ serial, originAirportCode, destinationAirportCode, weight, Date, arrivalOn, natureOfGoods, pieces }) => {     
+    const onFinish = async ({ serial, originAirportCode, destinationAirportCode, weight, Date, arrivalOn, natureOfGoods, pieces }) => {     
+            
+        setShowSpinner(true);
+        const consultarDisp = await AvailabilityObj(destinationAirportCode, originAirportCode, weight);
+        
+        setlistado(consultarDisp); 
+        setShowSpinner(false);
        
-        let availability = {
-            accountNumber: '14000110001',
-            carrierCodes: 'B6',           
-            originAirportCode: originAirportCode,
-            destinationAirportCode: destinationAirportCode,
-            // departureOn: '2024-02-26T20:30:00',
-            departureOn: Date,
-            arrivalOn: arrivalOn,
-            weight: weight
-        }
-
         setReserva_init({
             agentAccountNumber: '00000001116',
             airWaybill: {
@@ -44,33 +41,12 @@ export const Formulario = () => {
             pieces: pieces,
             segments: [],
             weight:{ amount:weight, unit: 'LB' }
-        });
-                        
-        vuelos(availability); 
-
-        availability = {};
-    };
-
-    const vuelos = async (availability) => {
-
-        const {accountNumber, carrierCodes, departureOn, arrivalOn, destinationAirportCode, 
-                originAirportCode, weight } = availability;
-        const url = `availability?accountNumber=${accountNumber}&carrierCodes=${carrierCodes}&originAirportCode=${originAirportCode}&destinationAirportCode=${destinationAirportCode}&departureOn=${departureOn}&arrivalOn=${arrivalOn}&weight=${weight}`;
-
-        try {          
-            const respuesta = await Availability.get(url);  
-            setlistado(respuesta.data.routes);                                  
-
-        } catch (error) {
-            console.log(error)            
-        }
-
-    }
+        });                        
+    };   
 
     return (
         <>
          <div >
-
           <Form                   
                 name="horizontal_login" 
                 layout="inline"  
@@ -85,7 +61,7 @@ export const Formulario = () => {
             >
 
                 <Form.Item  
-                    label="Prefix"                  
+                    label="Awb"                  
                     name="airlinePrefix"   
                     style={{ marginBottom: '1rem'}}
                     wrapperCol={{
@@ -118,7 +94,7 @@ export const Formulario = () => {
                 >
                     <Input 
                         type='text'  
-                        placeholder='Awb Number'                                         
+                        placeholder='Number'                                         
                     />
 
                 </Form.Item>
@@ -297,6 +273,11 @@ export const Formulario = () => {
             </Form>          
           
             <Divider />
+
+            {
+                (showSpinner) &&  <div> <Spinner /> </div>
+                                 
+            }
            
                 {
                          

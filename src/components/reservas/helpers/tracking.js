@@ -5,7 +5,7 @@ export const tracking = ( booking = {}) => {
     let sumary = [];    
 
     sumary = [
-        `Air Waybill: ${booking.booking.airwaybill.airlinePrefix} - ${booking.booking.airwaybill.serialNumber}`,
+        ` Air Waybill: ${booking.booking.airwaybill.airlinePrefix}-${booking.booking.airwaybill.serialNumber} `,
         `Status: ${booking.booking.airwaybill.routingSegments[0].actionStatus.description}`,
         `Shipper: `,
         `Consignee: `,
@@ -14,7 +14,8 @@ export const tracking = ( booking = {}) => {
                                 ${booking.booking.airwaybill.volume.amount}`,
         `Service: `,
         `SCC: `, 
-        `Goods: ${booking.booking.airwaybill.natureOfGoods}`,
+        `Goods: ${booking.booking.airwaybill.natureOfGoods}`
+        ,
         <TablaReserva key={1} data={booking.booking.airwaybill.events[0]}/>       
     ]
 

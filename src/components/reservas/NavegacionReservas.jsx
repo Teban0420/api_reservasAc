@@ -16,7 +16,6 @@ export const NavegacionReservas = () => {
   const { username } = auth
 
   const [collapsed, setCollapsed] = useState(false); 
-  const [guiaColapsado, setGuiaColapsado] = useState(true); 
   
   const {
     token: { colorBgContainer, borderRadiusLG },
@@ -28,7 +27,6 @@ export const NavegacionReservas = () => {
     setCollapsed(!collapsed);
 
   };
-
 
   return (
     <Layout style={{ minHeight: '100vh' }}>
@@ -46,7 +44,7 @@ export const NavegacionReservas = () => {
         <div className="demo-logo-vertical" />
 
         <img 
-          height='10%' 
+          height='7%' 
           width='90%' 
           style={{marginTop: '1rem', marginBottom: '1rem'}} 
           src={require('../ui/img/logo.png')} 

@@ -1,9 +1,7 @@
 import { Availability } from '../../../api/Availability';
 
-export const AvailabilityObj = async ( objeto = {}) =>{
-
-   const { destination, origin, totalWeight } = objeto;
-
+export const AvailabilityObj = async ( destination, origin, totalWeight) => {
+    
    const accountNumber = '14000110001';
    const carrierCodes = 'B6';
 
@@ -19,9 +17,7 @@ export const AvailabilityObj = async ( objeto = {}) =>{
         console.log(error) 
         return [];          
         
-    }
-
-    
+    }    
 
 }
 

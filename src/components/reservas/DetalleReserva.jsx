@@ -1,6 +1,6 @@
 
 import React, { useMemo, useState } from 'react';
-import { Divider, List, Typography } from 'antd';
+import { Divider, List } from 'antd';
 import { tracking } from './helpers/tracking';
 import { TablaEvents } from './TablaEvents';
 
@@ -19,7 +19,10 @@ export const DetalleReserva = (booking) => {
         <>
             <Divider orientation="right">Details</Divider>
               <List
-                header={<div><strong>Summary</strong></div>}
+                  style={{
+                    maxWidth: 1000,
+                }}
+                header={<div><strong style={{fontSize: 16}}>Summary</strong></div>}
                 footer={ <button className='btn btn-success' onClick={mostrarTabla}>
                             Show
                           </button>                        

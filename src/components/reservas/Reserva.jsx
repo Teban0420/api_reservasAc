@@ -88,8 +88,7 @@ export const Reserva = () => {
 
                 <Col xs={24} sm={12} md={8} lg={6} xl={10}>
 
-                    <Form.Item  
-                        label="Number"                 
+                    <Form.Item    
                         name="serialNumber" 
                         wrapperCol={{
                             span: 16,
@@ -104,7 +103,8 @@ export const Reserva = () => {
                         hasFeedback                 
                     >
                         <Input 
-                            type='text'                                           
+                            type='text'
+                            placeholder='number'                                           
                         />
 
                      </Form.Item>
