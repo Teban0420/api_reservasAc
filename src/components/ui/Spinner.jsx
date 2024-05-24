@@ -6,7 +6,7 @@ export const Spinner = () => {
 
   return (
 
-    <div className='spin'>
+    <div className='spin'> 
       <div className='centrar'>  
 
         <div className="sk-chase">

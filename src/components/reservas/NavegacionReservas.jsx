@@ -6,6 +6,7 @@ import { ApiContext } from '../../context/ApiContext';
 import { Formulario, Reserva, Home, ListBookings, Booking } from './index';
 import { ReservaProvider } from './context/reservaContext';
 import { BtnSalir } from '../ui/BtnSalir';
+import { Spinner } from '../ui/Spinner';
 
 
 const { Header, Sider, Content } = Layout;
@@ -16,6 +17,7 @@ export const NavegacionReservas = () => {
   const { username } = auth
 
   const [collapsed, setCollapsed] = useState(false); 
+  const [showSpineer, setShowSpinner] = useState(false); 
   
   const {
     token: { colorBgContainer, borderRadiusLG },
@@ -78,7 +80,7 @@ export const NavegacionReservas = () => {
                 icon: <CalendarOutlined />,
               },
               {
-                label: <BtnSalir  />,
+                label: <BtnSalir  showSpineer={showSpineer} setShowSpinner={setShowSpinner} />,
                 key: '5',                
               },
             ]}
@@ -107,10 +109,9 @@ export const NavegacionReservas = () => {
           
       }
           <p className='header'>  
-
             {( username ? username : '')}
-
           </p>
+
         </Header>
 
             <Content
@@ -122,6 +123,10 @@ export const NavegacionReservas = () => {
                 borderRadius: borderRadiusLG,
               }}
             >
+
+              { 
+                (showSpineer) && <Spinner />
+              }
   
               <ReservaProvider>
                 <Routes>

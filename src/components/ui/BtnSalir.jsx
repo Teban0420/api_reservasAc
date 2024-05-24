@@ -4,13 +4,16 @@ import { Button } from 'antd'
 import { ApiContext } from '../../context/ApiContext';
 import { ApiLogin } from '../../api/login';
 
-export const BtnSalir = () => {
+export const BtnSalir = ({showSpineer, setShowSpinner}) => {
 
     const [ auth, guardarAuth] = useContext(ApiContext);
     const { username, token } = auth;
+
     const navigate = useNavigate();
 
-    const salir = async () => {  
+    const salir = async () => { 
+      
+      setShowSpinner(true);
 
         try {
     
@@ -30,7 +33,9 @@ export const BtnSalir = () => {
               username: '',
             });
     
-            localStorage.clear()
+            localStorage.clear();
+
+            setShowSpinner(false);
             
             navigate('/');
           }      
