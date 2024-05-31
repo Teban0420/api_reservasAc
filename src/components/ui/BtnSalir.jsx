@@ -50,7 +50,7 @@ export const BtnSalir = ({showSpineer, setShowSpinner}) => {
     <Button 
         type='primary' 
         danger  
-        style={{marginTop: 10, width: '100%'}}
+        style={{marginTop: 10, width: '100%', backgroundColor: '#F58220'}}
         onClick={salir}                    
     >                      
     Log-out              

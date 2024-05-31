@@ -53,14 +53,15 @@
 }
 .login {   
     padding: 0;  
-    height: 100vh; 
-    height: 70%;
-    border-style: solid;
+    /* height: 100vh;  */
+    height: 50vh; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* border-style: solid;
     border-radius: 1.5rem;
-    border-width: 0.8px;
-    border-color: #2843A0; 
-    background-color: rgb(244, 244, 244, 0.4);
-    /* display: flex; */
+    border-width: 0.8px; */
+    /* border-color: #2843A0;  */    
    
     /* width: 100%;    
     margin-top: 10rem;
@@ -76,8 +77,7 @@
     .login {
         width: 80%;
         height: 70%;
-        margin: 2.5%  auto 0 auto;
-        display: block;
+        margin: 2.5%  auto 0 auto;           
     }
 }
 .contenedor { 
@@ -86,8 +86,15 @@
     width: 95%;
 }
 .logo { 
-    margin: 1.5rem;
-    background-color: #2843A0;
+    margin: 2.5rem 0;  
+    align-items: center;
+    justify-content: center;
+    display: flex;  
+}
+@media (min-width: 768px){
+    .logo{ 
+        margin: 3rem 0; 
+    }
 }
 .btn {
     padding-top: 1rem;
@@ -100,22 +107,21 @@
 .contenedor_login {
     height: 20rem; 
     width: 100%;
-    background-image: url(./components/ui/img/7.jpg);     
+    background-image: url(./components/ui/img/jetblue.jpeg);     
     background-size: cover;
     background-repeat: no-repeat; 
     background-position: center center;  
-    /* display: block; */
+    margin: 0.2rem;
 }
 
 @media (min-width: 768px){
     .contenedor_login{
         height: 100vh; 
         display: flex;
+       
     }
 }
-
 .hero {
-    margin: 0 ;
     width: 100%;
     height: 40%;
     padding-top: 15rem;    
@@ -134,6 +140,14 @@
         align-items: center;
         justify-content: center; 
         background-color: rgba(255, 255, 255, 0.4);
+    }
+}
+.year {
+    color: #1D2758;
+}
+@media (min-width: 768px){
+    .year {
+        color: white;
     }
 }
 

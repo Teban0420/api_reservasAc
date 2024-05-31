@@ -40,7 +40,7 @@ export const NavegacionReservas = () => {
          breakpoint="lg"
          collapsedWidth="0"
          trigger={null}         
-         style={{backgroundColor: '#2843A0'}}
+         style={{backgroundColor: '#1D2758'}}
       >
 
         <div className="demo-logo-vertical" />
@@ -55,7 +55,7 @@ export const NavegacionReservas = () => {
       
           <Menu
             theme="dark"
-            style={{backgroundColor: '#2843A0', fontSize: '17px', fontWeight: 'bold'}}
+            style={{backgroundColor: '#1D2758', fontSize: '17px', fontWeight: 'bold'}}
             mode="vertical"
             defaultSelectedKeys={['1']}
             items={[

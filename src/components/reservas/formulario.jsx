@@ -264,7 +264,8 @@ export const Formulario = () => {
                     
                     <Button
                         type="primary"
-                        htmlType="submit"                                        
+                        htmlType="submit"     
+                        style={{backgroundColor: '#2981C4', color: 'white'}}                                   
                     >
                         Search Flights
                     </Button>

@@ -74,11 +74,11 @@ export const Login = () => {
 
           <div className='hero'>
 
-            <div className='login'>
+            <div className='logo'>
+                <img  width='250' height='60' src={require('../ui/img/JetBlueCargo.png')} alt="JetBlue Cargo" />
+            </div>
 
-                <div className='logo'>
-                  <img  width='250' height='70' src={require('../ui/img/logo.png')} alt="Logo" />
-                </div>
+            <div className='login'>                
 
                 {
                   (showError) && <MsgError msg={contextHolder}  />                     
@@ -89,10 +89,10 @@ export const Login = () => {
                 <Form
                     name="basic"
                     labelCol={{
-                      span: 8,
+                      span: 6,
                     }}
                     wrapperCol={{
-                      span: 8,
+                      span: 16,
                     }}
                     onFinish={onFinish}
                     autoComplete="off"
@@ -132,17 +132,21 @@ export const Login = () => {
                   <Button 
                     type="primary" 
                     htmlType="submit"
-                    style={{backgroundColor: '#2843A0', marginTop: '1rem', color: 'white'}}
+                    style={{backgroundColor: '#1D2758', marginTop: '1rem', color: 'white'}}
                     disabled={btnEnviar}
                   >
-                    Send
+                    Login
                   </Button>
 
                  </Form.Item>
               </Form> 
 
             </div>
-              
+              <div className='logo'>
+                <span className='year'>{'© '} {new Date().getFullYear()} - </span>
+                <strong className='year'style={{marginRight: 5}}>Powered By</strong> {''}               
+                  <img  width='180' height='40' src={require('../ui/img/aeronexcargologo.png')} alt="Logo" />
+              </div>
           </div>
         
         </div>
