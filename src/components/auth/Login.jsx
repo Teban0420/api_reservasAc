@@ -1,6 +1,7 @@
 import { useContext, useState } from 'react'
 import { useNavigate, Link  } from 'react-router-dom';
 import { Button,  Form, Input, Typography, message} from 'antd';
+import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import { ApiContext } from '../../context/ApiContext';
 import { ApiLogin } from '../../api/login';
 import { MsgError } from '../ui/MsgError';
@@ -32,7 +33,7 @@ export const Login = () => {
         password
       });
 
-      const { sessionid, agents, username } = respuesta.data;
+      const { sessionid, agents, username, changepassword } = respuesta.data;
 
       localStorage.setItem('token', sessionid);
       
@@ -69,10 +70,12 @@ export const Login = () => {
 
     return(
       <>         
-          <div className="container-sm text-center "> 
+        <div className='contenedor_login'>
 
-              <div className='login'>  
-                      
+          <div className='hero'>
+
+            <div className='login'>
+
                 <div className='logo'>
                   <img  width='250' height='70' src={require('../ui/img/logo.png')} alt="Logo" />
                 </div>
@@ -81,8 +84,6 @@ export const Login = () => {
                   (showError) && <MsgError msg={contextHolder}  />                     
                 }
 
-                {/* <Title level={2} style={{color: 'white'}}>Login</Title>  */}
-              
                 <br />
                 <br />
                 <Form
@@ -97,7 +98,7 @@ export const Login = () => {
                     autoComplete="off"
                 >
                   <Form.Item          
-                      label="Username"
+                      label={ <UserOutlined style={{fontSize: 20}} />}
                       name="user"               
                       rules={[
                         {
@@ -106,11 +107,11 @@ export const Login = () => {
                         },
                       ]}
                   >
-                  <Input />
+                  <Input  placeholder='Username' />
                  </Form.Item>
 
                 <Form.Item
-                    label="Password"
+                    label={<LockOutlined style={{fontSize: 20}}/>}
                     name="password"
                     rules={[
                       {
@@ -119,19 +120,19 @@ export const Login = () => {
                       },
                     ]}
                 >
-                  <Input.Password />
+                  <Input.Password  placeholder='Password'/>
                 </Form.Item>
 
                 <Form.Item
                     wrapperCol={{
-                      offset: 8,
-                      span: 16,
+                      offset: 10,
+                      span: 8,
                     }}
                 >
                   <Button 
                     type="primary" 
                     htmlType="submit"
-                    style={{backgroundColor: 'white', marginTop: '1rem', color: '#2843A0'}}
+                    style={{backgroundColor: '#2843A0', marginTop: '1rem', color: 'white'}}
                     disabled={btnEnviar}
                   >
                     Send
@@ -140,8 +141,12 @@ export const Login = () => {
                  </Form.Item>
               </Form> 
 
+            </div>
+              
           </div>
-        </div> 
+        
+        </div>
+        
       </>
     )
 }

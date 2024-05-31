@@ -14,7 +14,7 @@ const { Header, Sider, Content } = Layout;
 export const NavegacionReservas = () => {
 
   const [ auth, guardarAuth] = useContext(ApiContext);
-  const { username } = auth
+  const { username } = auth;
 
   const [collapsed, setCollapsed] = useState(false); 
   const [showSpineer, setShowSpinner] = useState(false); 

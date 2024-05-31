@@ -29,7 +29,8 @@ export const Formulario = () => {
         setShowSpinner(false);
        
         setReserva_init({
-            agentAccountNumber: '00000001116',
+            // agentAccountNumber: '00000001116',
+            agentAccountNumber: 'UTST001',
             airWaybill: {
                 prefix: '279',
                 referenceType: 'AIR WAYBILL',
