@@ -1,11 +1,12 @@
 import { useContext, useState } from 'react'
-import { useNavigate, Link  } from 'react-router-dom';
+import { useNavigate} from 'react-router-dom';
 import { Button,  Form, Input, Typography, message} from 'antd';
-import { UserOutlined, LockOutlined } from '@ant-design/icons';
+import { UserOutlined, LockOutlined, EnvironmentOutlined } from '@ant-design/icons';
 import { ApiContext } from '../../context/ApiContext';
 import { ApiLogin } from '../../api/login';
 import { MsgError } from '../ui/MsgError';
 import { Spinner } from '../ui/Spinner';
+import { TrackingHome } from '../Modal/TrackingHome';
 
 
 const { Title} = Typography
@@ -18,8 +19,14 @@ export const Login = () => {
   const [btnEnviar, setBtnEnviar] = useState(false);
   const [showSpinner, setShowSpinner] = useState(false);
 
+  const [open, setOpen] = useState(false);
+
   const navigate = useNavigate(); 
   const [messageApi, contextHolder] = message.useMessage();
+
+  const Track = () => {
+    setOpen(true);
+  }
 
   const onFinish = async ({user, password}) => {
     
@@ -75,7 +82,7 @@ export const Login = () => {
           <div className='hero'>
 
             <div className='logo'>
-                <img  width='250' height='60' src={require('../ui/img/JetBlueCargo.png')} alt="JetBlue Cargo" />
+                <img  width='300' height='60' src={require('../ui/img/JetBlueCargo.png')} alt="JetBlue Cargo" />
             </div>
 
             <div className='login'>                
@@ -84,8 +91,6 @@ export const Login = () => {
                   (showError) && <MsgError msg={contextHolder}  />                     
                 }
 
-                <br />
-                <br />
                 <Form
                     name="basic"
                     labelCol={{
@@ -116,7 +121,7 @@ export const Login = () => {
                     rules={[
                       {
                         required: true,
-                        message: 'Input password',
+                        message: 'Input password', 
                       },
                     ]}
                 >
@@ -138,16 +143,33 @@ export const Login = () => {
                     Login
                   </Button>
 
-                 </Form.Item>
-              </Form> 
+               </Form.Item>
 
-            </div>
+                <Button 
+                  type="link" 
+                  style={{backgroundColor: '#1D2758', color: 'white', marginLeft: 50}}
+                  onClick={Track}                    
+                >
+                <EnvironmentOutlined style={{fontSize: 15}}/>Track My Shipment
+               </Button>
+
+              </Form> 
+            </div>              
+
+              <TrackingHome open={open} setOpen={setOpen} />          
+
               <div className='logo'>
+
                 <span className='year'>{'© '} {new Date().getFullYear()} - </span>
-                <strong className='year'style={{marginRight: 5}}>Powered By</strong> {''}               
-                  <img  width='180' height='40' src={require('../ui/img/aeronexcargologo.png')} alt="Logo" />
+
+                <strong className='year'style={{marginRight: 5}}>Powered By</strong> {''}   
+
+                  <img className='footer_logo' src={require('../ui/img/aeronexcargologo.png')} alt="Logo" />
+
               </div>
-          </div>
+
+              <br />
+          </div> 
         
         </div>
         

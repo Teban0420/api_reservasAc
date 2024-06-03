@@ -19,7 +19,6 @@ export const Reserva = () => {
     const onFinish = ({serialNumber}) => {
         consultar_reserva(serialNumber);    
     };
-
     const consultar_reserva = async (serialNumber) => {
 
         // const url = `airwaybill?airlinePrefix=950&serialNumber=${serialNumber}`;
@@ -55,7 +54,7 @@ export const Reserva = () => {
                     layout="inline"
                     size='small'  
                     labelCol={{
-                        span: 8,
+                        span: (window.innerWidth > 720 ? 20 : 8),
                     }}
                     wrapperCol={{
                         span: 10,
@@ -70,10 +69,10 @@ export const Reserva = () => {
                  <Col xs={24} sm={16} md={8} lg={6} xl={6}>
 
                     <Form.Item  
-                        label="Awb"                  
+                        label="AWB Number"                  
                         name="airlinePrefix"                       
                         wrapperCol={{
-                            span: 16,
+                            span: 10,
                         }}            
                     >
                         <Input 
@@ -86,13 +85,14 @@ export const Reserva = () => {
 
                 </Col>
 
-                <Col xs={24} sm={12} md={8} lg={6} xl={10}>
+               <span style={{marginLeft: (window.innerWidth > 720 ? 8 : 15)}}> – </span>
+
+                <Col xs={24} sm={12} md={8} lg={6} xl={8}>
 
                     <Form.Item  
-                        label='Number'  
                         name="serialNumber" 
                         wrapperCol={{
-                            span: 16,
+                            span: 20,
                         }}  
                         rules={[
                             {
@@ -114,7 +114,11 @@ export const Reserva = () => {
            
                 <Form.Item className='btn'>
 
-                    <Button type="primary" htmlType="submit" style={{backgroundColor: '#2981C4', color: 'white'}} > 
+                    <Button 
+                        type="primary" 
+                        htmlType="submit" 
+                        style={{backgroundColor: '#1D2758', color: 'white', marginLeft: (window.innerWidth > 720 ? -15 : 10)}} 
+                    > 
                         Submit
                     </Button>
 

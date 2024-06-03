@@ -46,10 +46,9 @@ export const NavegacionReservas = () => {
         <div className="demo-logo-vertical" />
 
           <img 
-            height='50rem' 
-            width='100%' 
-            style={{marginTop: '1rem', marginBottom: '1rem'}} 
-            src={require('../ui/img/logo.png')} 
+            width='95%' 
+            style={{marginTop: '1.5rem', marginBottom: '1rem', marginLeft: '0.25rem'}} 
+            src={require('../ui/img/JBCargoLogo.png')} 
             alt="Logo" 
           />
       
@@ -80,8 +79,12 @@ export const NavegacionReservas = () => {
                 icon: <CalendarOutlined />,
               },
               {
-                label: <BtnSalir  showSpineer={showSpineer} setShowSpinner={setShowSpinner} />,
+                label: '',
                 key: '5',                
+              },
+              {
+                label: <BtnSalir  showSpineer={showSpineer} setShowSpinner={setShowSpinner} />,
+                key: '6',                
               },
             ]}
           />

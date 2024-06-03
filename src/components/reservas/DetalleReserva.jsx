@@ -8,8 +8,9 @@ import { TablaEvents } from './TablaEvents';
 export const DetalleReserva = (booking) => { 
 
   const summary = useMemo( () => tracking(booking), [booking]);
-  const events = Object.values(booking.booking.airwaybill.events);   
-  const [ mostrar, setMostrar] = useState(false);
+  const events = Object.values(booking.booking.airwaybill.events);  
+
+  const [ mostrar, setMostrar ] = useState(false);
  
   const mostrarTabla = () => {
       setMostrar(!mostrar); 
@@ -23,7 +24,7 @@ export const DetalleReserva = (booking) => {
                     maxWidth: 1000,
                 }}
                 header={<div><strong style={{fontSize: 16}}>Summary</strong></div>}
-                footer={ <button className='btn btn-success' onClick={mostrarTabla}>
+                footer={ <button className='btn btn-success' onClick={mostrarTabla} style={{backgroundColor: '#1D2758', color: 'white'}}>
                             Show
                           </button>                        
                         }                        
